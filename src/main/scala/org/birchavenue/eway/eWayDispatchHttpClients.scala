@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 trait eWayDispatchHttpClients extends HttpClients {
-  
-  val logger = LoggerFactory.getLogger("org.birchavenue.eway");
   val key: String
   val password: String
   
@@ -15,6 +13,7 @@ trait eWayDispatchHttpClients extends HttpClients {
   trait eWayDispatchHttpClient extends HttpClient {
     import dispatch._
 
+    private[this] val logger = LoggerFactory.getLogger(getClass().getName());
     def request(in: String, address: java.net.URI, headers: Map[String, String]): String = {
       val req = url(address.toString) << in <:< headers  as (key,password)
       logger.debug("REQUEST: " + in)

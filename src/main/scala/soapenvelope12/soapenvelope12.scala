@@ -43,21 +43,22 @@ case class Faultcode(Value: soapenvelope12.FaultcodeEnum,
 trait FaultcodeEnum
 
 object FaultcodeEnum {
-  def fromString(value: String): FaultcodeEnum = value match {
-    case "tns:DataEncodingUnknown" => TnsDataEncodingUnknown
-    case "tns:MustUnderstand" => TnsMustUnderstand
-    case "tns:Receiver" => TnsReceiver
-    case "tns:Sender" => TnsSender
-    case "tns:VersionMismatch" => TnsVersionMismatch
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): FaultcodeEnum = ({ val (ns, localPart) = scalaxb.Helper.splitQName(value, scope)
+    new javax.xml.namespace.QName(ns.orNull, localPart).toString }) match {
+    case "{http://www.w3.org/2003/05/soap-envelope}DataEncodingUnknown" => U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125DataEncodingUnknown
+    case "{http://www.w3.org/2003/05/soap-envelope}MustUnderstand" => U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125MustUnderstand
+    case "{http://www.w3.org/2003/05/soap-envelope}Receiver" => U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125Receiver
+    case "{http://www.w3.org/2003/05/soap-envelope}Sender" => U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125Sender
+    case "{http://www.w3.org/2003/05/soap-envelope}VersionMismatch" => U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125VersionMismatch
 
   }
 }
 
-case object TnsDataEncodingUnknown extends FaultcodeEnum { override def toString = "tns:DataEncodingUnknown" }
-case object TnsMustUnderstand extends FaultcodeEnum { override def toString = "tns:MustUnderstand" }
-case object TnsReceiver extends FaultcodeEnum { override def toString = "tns:Receiver" }
-case object TnsSender extends FaultcodeEnum { override def toString = "tns:Sender" }
-case object TnsVersionMismatch extends FaultcodeEnum { override def toString = "tns:VersionMismatch" }
+case object U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125DataEncodingUnknown extends FaultcodeEnum { override def toString = "{http://www.w3.org/2003/05/soap-envelope}DataEncodingUnknown" }
+case object U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125MustUnderstand extends FaultcodeEnum { override def toString = "{http://www.w3.org/2003/05/soap-envelope}MustUnderstand" }
+case object U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125Receiver extends FaultcodeEnum { override def toString = "{http://www.w3.org/2003/05/soap-envelope}Receiver" }
+case object U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125Sender extends FaultcodeEnum { override def toString = "{http://www.w3.org/2003/05/soap-envelope}Sender" }
+case object U123httpu58u47u47wwwu46w3u46orgu472003u4705u47soapu45envelopeu125VersionMismatch extends FaultcodeEnum { override def toString = "{http://www.w3.org/2003/05/soap-envelope}VersionMismatch" }
 
 
 case class Subcode(Value: javax.xml.namespace.QName,

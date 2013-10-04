@@ -9,36 +9,11 @@ val document = scalaxb.toXML[org.birchavenue.eway.Foo](obj, "foo", org.birchaven
 object `package` extends XMLProtocol { }
 
 trait XMLProtocol extends scalaxb.XMLStandardTypes {
-  val defaultScope = scalaxb.toScope(None -> "https://api.ewaypayments.com/",
-    Some("tns0") -> "https://www.eway.com.au/gateway/managedpayment/test",
-    Some("tns") -> "https://api.ewaypayments.com/",
+  val defaultScope = scalaxb.toScope(None -> "https://www.eway.com.au/gateway/managedpayment/test",
+    Some("tns0") -> "https://api.ewaypayments.com/",
+    Some("tns") -> "https://www.eway.com.au/gateway/managedpayment/test",
     Some("xs") -> "http://www.w3.org/2001/XMLSchema",
     Some("xsi") -> "http://www.w3.org/2001/XMLSchema-instance")
-  implicit lazy val EwayCreateAccessCodeFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCode] = new DefaultEwayCreateAccessCodeFormat {}
-  implicit lazy val EwayCreateAccessCodeRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeRequest] = new DefaultEwayCreateAccessCodeRequestFormat {}
-  implicit lazy val EwayBaseRequestableFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseRequestable] = new DefaultEwayBaseRequestableFormat {}
-  implicit lazy val EwayBaseRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseRequest] = new DefaultEwayBaseRequestFormat {}
-  implicit lazy val EwayCustomerableFormat: scalaxb.XMLFormat[org.birchavenue.eway.Customerable] = new DefaultEwayCustomerableFormat {}
-  implicit lazy val EwayCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.Customer] = new DefaultEwayCustomerFormat {}
-  implicit lazy val EwayTokenCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomer] = new DefaultEwayTokenCustomerFormat {}
-  implicit lazy val EwayTokenCustomerSequence1Format: scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomerSequence1] = new DefaultEwayTokenCustomerSequence1Format {}
-  implicit lazy val EwayShippingAddressFormat: scalaxb.XMLFormat[org.birchavenue.eway.ShippingAddress] = new DefaultEwayShippingAddressFormat {}
-  implicit lazy val EwayArrayOfLineItemFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfLineItem] = new DefaultEwayArrayOfLineItemFormat {}
-  implicit lazy val EwayLineItemFormat: scalaxb.XMLFormat[org.birchavenue.eway.LineItem] = new DefaultEwayLineItemFormat {}
-  implicit lazy val EwayArrayOfOptionFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfOption] = new DefaultEwayArrayOfOptionFormat {}
-  implicit lazy val EwayOptionTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.OptionType] = new DefaultEwayOptionTypeFormat {}
-  implicit lazy val EwayPaymentFormat: scalaxb.XMLFormat[org.birchavenue.eway.Payment] = new DefaultEwayPaymentFormat {}
-  implicit lazy val EwayMethodFormat: scalaxb.XMLFormat[org.birchavenue.eway.Method] = new DefaultEwayMethodFormat {}
-  implicit lazy val EwayCreateAccessCodeResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeResponse] = new DefaultEwayCreateAccessCodeResponseFormat {}
-  implicit lazy val EwayCreateAccessCodeResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeResponseType] = new DefaultEwayCreateAccessCodeResponseTypeFormat {}
-  implicit lazy val EwayBaseResponsableFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseResponsable] = new DefaultEwayBaseResponsableFormat {}
-  implicit lazy val EwayBaseResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseResponse] = new DefaultEwayBaseResponseFormat {}
-  implicit lazy val EwayGetAccessCodeResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResult] = new DefaultEwayGetAccessCodeResultFormat {}
-  implicit lazy val EwayGetAccessCodeResultRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResultRequest] = new DefaultEwayGetAccessCodeResultRequestFormat {}
-  implicit lazy val EwayGetAccessCodeResultResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResultResponse] = new DefaultEwayGetAccessCodeResultResponseFormat {}
-  implicit lazy val EwayGetAccessCodeResultResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResultResponseType] = new DefaultEwayGetAccessCodeResultResponseTypeFormat {}
-  implicit lazy val EwayVerificationResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.VerificationResult] = new DefaultEwayVerificationResultFormat {}
-  implicit lazy val EwayVerificationStatusFormat: scalaxb.XMLFormat[org.birchavenue.eway.VerificationStatus] = new DefaultEwayVerificationStatusFormat {}
   implicit lazy val EwayCreateCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateCustomer] = new DefaultEwayCreateCustomerFormat {}
   implicit lazy val EwayCreateCustomerSequence1Format: scalaxb.XMLFormat[org.birchavenue.eway.CreateCustomerSequence1] = new DefaultEwayCreateCustomerSequence1Format {}
   implicit lazy val EwayCreateCustomerSequence2Format: scalaxb.XMLFormat[org.birchavenue.eway.CreateCustomerSequence2] = new DefaultEwayCreateCustomerSequence2Format {}
@@ -68,682 +43,75 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
   implicit lazy val EwayQueryPaymentResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.QueryPaymentResponse] = new DefaultEwayQueryPaymentResponseFormat {}
   implicit lazy val EwayArrayOfManagedTransactionFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfManagedTransaction] = new DefaultEwayArrayOfManagedTransactionFormat {}
   implicit lazy val EwayManagedTransactionFormat: scalaxb.XMLFormat[org.birchavenue.eway.ManagedTransaction] = new DefaultEwayManagedTransactionFormat {}
-
-  trait DefaultEwayCreateAccessCodeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCode] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCode] =
-      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
-      { case p1 =>
-      org.birchavenue.eway.CreateAccessCode(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeRequest](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCode, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (scalaxb.toXML[Option[org.birchavenue.eway.CreateAccessCodeRequest]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
-
-  }
-
-  trait DefaultEwayCreateAccessCodeRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeRequest] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("CreateAccessCodeRequest")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeRequest] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingAddress")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Items")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "RedirectUrl")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerIP")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DeviceID")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Method")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 =>
-      org.birchavenue.eway.CreateAccessCodeRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.Customerable](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.ShippingAddress](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfLineItem](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[org.birchavenue.eway.Payment](_, scalaxb.ElemName(node) :: stack) },
-        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        scalaxb.fromXML[org.birchavenue.eway.Method](p9, scalaxb.ElemName(node) :: stack)) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(__obj.Customer map { scalaxb.toXML[org.birchavenue.eway.Customerable](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
-        __obj.ShippingAddress map { scalaxb.toXML[org.birchavenue.eway.ShippingAddress](_, Some("https://api.ewaypayments.com/"), Some("ShippingAddress"), __scope, false) } getOrElse {Nil},
-        __obj.Items map { scalaxb.toXML[org.birchavenue.eway.ArrayOfLineItem](_, Some("https://api.ewaypayments.com/"), Some("Items"), __scope, false) } getOrElse {Nil},
-        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
-        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Payment](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
-        __obj.RedirectUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("RedirectUrl"), __scope, false) } getOrElse {Nil},
-        __obj.CustomerIP map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CustomerIP"), __scope, false) } getOrElse {Nil},
-        __obj.DeviceID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("DeviceID"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[org.birchavenue.eway.Method](__obj.Method, Some("https://api.ewaypayments.com/"), Some("Method"), __scope, false))
-
-  }
-
-  trait DefaultEwayBaseRequestableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BaseRequestable] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BaseRequestable] = seq match {
-      case node: scala.xml.Node =>     
-        scalaxb.Helper.instanceType(node) match {
-          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeRequest](node, stack))
-          case (Some("https://api.ewaypayments.com/"), Some("GetAccessCodeResultRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultRequest](node, stack))
-          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.BaseRequest](node, stack))
-        }
-      case _ => Left("reads failed: seq must be scala.xml.Node")  
-    }
-    
-    def writes(__obj: org.birchavenue.eway.BaseRequestable, __namespace: Option[String], __elementLabel: Option[String],
-        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
-      case x: org.birchavenue.eway.CreateAccessCodeRequest => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeRequest](x, __namespace, __elementLabel, __scope, true)
-      case x: org.birchavenue.eway.GetAccessCodeResultRequest => scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultRequest](x, __namespace, __elementLabel, __scope, true)
-      case x: org.birchavenue.eway.BaseRequest => scalaxb.toXML[org.birchavenue.eway.BaseRequest](x, __namespace, __elementLabel, __scope, false)
-    }
-  }
-
-  trait DefaultEwayBaseRequestFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BaseRequest] with scalaxb.CanWriteChildNodes[org.birchavenue.eway.BaseRequest] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BaseRequest] = seq match {
-      case node: scala.xml.Node => Right(org.birchavenue.eway.BaseRequest())
-      case _ => Left("reads failed: seq must be scala.xml.Node")
-    }
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.BaseRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Nil
-
-
-  }
-
-  trait DefaultEwayCustomerableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.Customerable] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.Customerable] = seq match {
-      case node: scala.xml.Node =>     
-        scalaxb.Helper.instanceType(node) match {
-          case (Some("https://api.ewaypayments.com/"), Some("TokenCustomer")) => Right(scalaxb.fromXML[org.birchavenue.eway.TokenCustomer](node, stack))
-          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.Customer](node, stack))
-        }
-      case _ => Left("reads failed: seq must be scala.xml.Node")  
-    }
-    
-    def writes(__obj: org.birchavenue.eway.Customerable, __namespace: Option[String], __elementLabel: Option[String],
-        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
-      case x: org.birchavenue.eway.TokenCustomer => scalaxb.toXML[org.birchavenue.eway.TokenCustomer](x, __namespace, __elementLabel, __scope, true)
-      case x: org.birchavenue.eway.Customer => scalaxb.toXML[org.birchavenue.eway.Customer](x, __namespace, __elementLabel, __scope, false)
-    }
-  }
-
-  trait DefaultEwayCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.Customer] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("Customer")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.Customer] =
-      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Reference")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Title")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CompanyName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "JobDescription")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Comments")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Url")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 ~ p16 ~ p17 ~ p18 ~ p19 =>
-      org.birchavenue.eway.Customer(p1.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p13.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p14.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p15.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p16.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p17.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p18.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p19.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.Customer, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
-        __obj.Reference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Reference"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[Option[String]](__obj.Title, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false),
-        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
-        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
-        __obj.CompanyName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CompanyName"), __scope, false) } getOrElse {Nil},
-        __obj.JobDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("JobDescription"), __scope, false) } getOrElse {Nil},
-        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
-        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
-        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
-        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
-        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
-        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
-        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
-        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
-        __obj.Mobile map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false) } getOrElse {Nil},
-        __obj.Comments map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Comments"), __scope, false) } getOrElse {Nil},
-        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil},
-        __obj.Url map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Url"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayTokenCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TokenCustomer] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("TokenCustomer")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TokenCustomer] =
-      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Reference")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Title")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CompanyName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "JobDescription")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Comments")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Url")) ~ 
-      ((opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardNumber")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardStartMonth")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardStartYear")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardIssueNumber")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardExpiryMonth")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardExpiryYear")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "IsActive"))) ^^ 
-        { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 => org.birchavenue.eway.TokenCustomerSequence1(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        scalaxb.fromXML[Boolean](p8, scalaxb.ElemName(node) :: stack)) }) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 ~ p16 ~ p17 ~ p18 ~ p19 ~ p20 =>
-      org.birchavenue.eway.TokenCustomer(p1.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p13.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p14.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p15.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p16.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p17.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p18.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p19.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p20) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.TokenCustomer, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
-        __obj.Reference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Reference"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[Option[String]](__obj.Title, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false),
-        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
-        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
-        __obj.CompanyName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CompanyName"), __scope, false) } getOrElse {Nil},
-        __obj.JobDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("JobDescription"), __scope, false) } getOrElse {Nil},
-        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
-        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
-        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
-        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
-        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
-        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
-        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
-        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
-        __obj.Mobile map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false) } getOrElse {Nil},
-        __obj.Comments map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Comments"), __scope, false) } getOrElse {Nil},
-        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil},
-        __obj.Url map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Url"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[org.birchavenue.eway.TokenCustomerSequence1](__obj.tokencustomersequence1, None, Some("tokencustomersequence1"), __scope, false))
-
-  }
-
-  trait DefaultEwayTokenCustomerSequence1Format extends scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomerSequence1] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.TokenCustomerSequence1] = Left("don't call me.")
-    
-    def writes(__obj: org.birchavenue.eway.TokenCustomerSequence1, __namespace: Option[String], __elementLabel: Option[String], 
-        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
-      Seq.concat(__obj.CardNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardNumber"), __scope, false) } getOrElse {Nil},
-        __obj.CardStartMonth map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardStartMonth"), __scope, false) } getOrElse {Nil},
-        __obj.CardStartYear map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardStartYear"), __scope, false) } getOrElse {Nil},
-        __obj.CardIssueNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardIssueNumber"), __scope, false) } getOrElse {Nil},
-        __obj.CardName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardName"), __scope, false) } getOrElse {Nil},
-        __obj.CardExpiryMonth map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardExpiryMonth"), __scope, false) } getOrElse {Nil},
-        __obj.CardExpiryYear map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardExpiryYear"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[Boolean](__obj.IsActive, Some("https://api.ewaypayments.com/"), Some("IsActive"), __scope, false))
-
-
-  }
-
-  trait DefaultEwayShippingAddressFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ShippingAddress] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("ShippingAddress")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ShippingAddress] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingMethod")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 =>
-      org.birchavenue.eway.ShippingAddress(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.ShippingAddress, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(__obj.ShippingMethod map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ShippingMethod"), __scope, false) } getOrElse {Nil},
-        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
-        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
-        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
-        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
-        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
-        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
-        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
-        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
-        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
-        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
-        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayArrayOfLineItemFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ArrayOfLineItem] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("ArrayOfLineItem")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ArrayOfLineItem] =
-      phrase(rep(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LineItem")) ^^
-      { case p1 =>
-      org.birchavenue.eway.ArrayOfLineItem(p1.toSeq map { _.nilOption map { scalaxb.fromXML[org.birchavenue.eway.LineItem](_, scalaxb.ElemName(node) :: stack) }}: _*) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.ArrayOfLineItem, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.LineItem flatMap { scalaxb.toXML[Option[org.birchavenue.eway.LineItem]](_, Some("https://api.ewaypayments.com/"), Some("LineItem"), __scope, false) })
-
-  }
-
-  trait DefaultEwayLineItemFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.LineItem] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("LineItem")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.LineItem] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "SKU")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Description")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Quantity")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "UnitCost")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Tax")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Total")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 =>
-      org.birchavenue.eway.LineItem(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
-        p4.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
-        p5.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
-        p6.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.LineItem, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(__obj.SKU map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("SKU"), __scope, false) } getOrElse {Nil},
-        __obj.Description map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Description"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[Option[Int]](__obj.Quantity, Some("https://api.ewaypayments.com/"), Some("Quantity"), __scope, false),
-        scalaxb.toXML[Option[Int]](__obj.UnitCost, Some("https://api.ewaypayments.com/"), Some("UnitCost"), __scope, false),
-        scalaxb.toXML[Option[Int]](__obj.Tax, Some("https://api.ewaypayments.com/"), Some("Tax"), __scope, false),
-        scalaxb.toXML[Option[Int]](__obj.Total, Some("https://api.ewaypayments.com/"), Some("Total"), __scope, false))
-
-  }
-
-  trait DefaultEwayArrayOfOptionFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ArrayOfOption] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("ArrayOfOption")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ArrayOfOption] =
-      phrase(rep(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Option")) ^^
-      { case p1 =>
-      org.birchavenue.eway.ArrayOfOption(p1.toSeq map { _.nilOption map { scalaxb.fromXML[org.birchavenue.eway.OptionType](_, scalaxb.ElemName(node) :: stack) }}: _*) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.ArrayOfOption, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.Option flatMap { scalaxb.toXML[Option[org.birchavenue.eway.OptionType]](_, Some("https://api.ewaypayments.com/"), Some("Option"), __scope, false) })
-
-  }
-
-  trait DefaultEwayOptionTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.OptionType] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("Option")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.OptionType] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Value")) ^^
-      { case p1 =>
-      org.birchavenue.eway.OptionType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.OptionType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.Value map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Value"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayPaymentFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.Payment] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("Payment")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.Payment] =
-      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TotalAmount")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceNumber")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceDescription")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceReference")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CurrencyCode")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
-      org.birchavenue.eway.Payment(scalaxb.fromXML[Int](p1, scalaxb.ElemName(node) :: stack),
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.Payment, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(scalaxb.toXML[Int](__obj.TotalAmount, Some("https://api.ewaypayments.com/"), Some("TotalAmount"), __scope, false),
-        __obj.InvoiceNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceNumber"), __scope, false) } getOrElse {Nil},
-        __obj.InvoiceDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceDescription"), __scope, false) } getOrElse {Nil},
-        __obj.InvoiceReference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceReference"), __scope, false) } getOrElse {Nil},
-        __obj.CurrencyCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CurrencyCode"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  def buildEwayMethodFormat = new DefaultEwayMethodFormat {}
-  trait DefaultEwayMethodFormat extends scalaxb.XMLFormat[org.birchavenue.eway.Method] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.Method] =
-      Right(org.birchavenue.eway.Method.fromString(seq.text))
-    
-    def writes(__obj: org.birchavenue.eway.Method, __namespace: Option[String], __elementLabel: Option[String],
-        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
-      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
-        __elementLabel getOrElse { sys.error("missing element label.") },
-        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
-  }
-
-  trait DefaultEwayCreateAccessCodeResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeResponse] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeResponse] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CreateAccessCodeResult")) ^^
-      { case p1 =>
-      org.birchavenue.eway.CreateAccessCodeResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponseType](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.CreateAccessCodeResult map { scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeResponseType](_, Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeResult"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayCreateAccessCodeResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeResponseType] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("CreateAccessCodeResponse")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeResponseType] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FormActionURL")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
-      org.birchavenue.eway.CreateAccessCodeResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.TokenCustomer](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.Payment](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
-        __obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil},
-        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.TokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
-        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Payment](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
-        __obj.FormActionURL map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FormActionURL"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayBaseResponsableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BaseResponsable] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BaseResponsable] = seq match {
-      case node: scala.xml.Node =>     
-        scalaxb.Helper.instanceType(node) match {
-          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponseType](node, stack))
-          case (Some("https://api.ewaypayments.com/"), Some("GetAccessCodeResultResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultResponseType](node, stack))
-          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.BaseResponse](node, stack))
-        }
-      case _ => Left("reads failed: seq must be scala.xml.Node")  
-    }
-    
-    def writes(__obj: org.birchavenue.eway.BaseResponsable, __namespace: Option[String], __elementLabel: Option[String],
-        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
-      case x: org.birchavenue.eway.CreateAccessCodeResponseType => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeResponseType](x, __namespace, __elementLabel, __scope, true)
-      case x: org.birchavenue.eway.GetAccessCodeResultResponseType => scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultResponseType](x, __namespace, __elementLabel, __scope, true)
-      case x: org.birchavenue.eway.BaseResponse => scalaxb.toXML[org.birchavenue.eway.BaseResponse](x, __namespace, __elementLabel, __scope, false)
-    }
-  }
-
-  trait DefaultEwayBaseResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.BaseResponse] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("BaseResponse")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.BaseResponse] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ^^
-      { case p1 =>
-      org.birchavenue.eway.BaseResponse(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.BaseResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayGetAccessCodeResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResult] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResult] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
-      { case p1 =>
-      org.birchavenue.eway.GetAccessCodeResult(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultRequest](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.request map { scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultRequest](_, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayGetAccessCodeResultRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResultRequest] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("GetAccessCodeResultRequest")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResultRequest] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ^^
-      { case p1 =>
-      org.birchavenue.eway.GetAccessCodeResultRequest(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResultRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayGetAccessCodeResultResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResultResponse] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResultResponse] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "GetAccessCodeResultResult")) ^^
-      { case p1 =>
-      org.birchavenue.eway.GetAccessCodeResultResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultResponseType](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResultResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      (__obj.GetAccessCodeResultResult map { scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultResponseType](_, Some("https://api.ewaypayments.com/"), Some("GetAccessCodeResultResult"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayGetAccessCodeResultResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResultResponseType] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("GetAccessCodeResultResponse")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResultResponseType] =
-      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AuthorisationCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseCode")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseMessage")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceNumber")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceReference")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TotalAmount")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionStatus")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "BeagleScore")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
-      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Verification")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 =>
-      org.birchavenue.eway.GetAccessCodeResultResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
-        p8.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
-        p9.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
-        p10.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
-        p11.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
-        p12.nilOption map { scalaxb.fromXML[BigDecimal](_, scalaxb.ElemName(node) :: stack) },
-        p13.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
-        p14.headOption map { scalaxb.fromXML[org.birchavenue.eway.VerificationResult](_, scalaxb.ElemName(node) :: stack) }) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResultResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
-        __obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil},
-        __obj.AuthorisationCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AuthorisationCode"), __scope, false) } getOrElse {Nil},
-        __obj.ResponseCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseCode"), __scope, false) } getOrElse {Nil},
-        __obj.ResponseMessage map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseMessage"), __scope, false) } getOrElse {Nil},
-        __obj.InvoiceNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceNumber"), __scope, false) } getOrElse {Nil},
-        __obj.InvoiceReference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceReference"), __scope, false) } getOrElse {Nil},
-        scalaxb.toXML[Option[Int]](__obj.TotalAmount, Some("https://api.ewaypayments.com/"), Some("TotalAmount"), __scope, false),
-        scalaxb.toXML[Option[Int]](__obj.TransactionID, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false),
-        scalaxb.toXML[Option[Boolean]](__obj.TransactionStatus, Some("https://api.ewaypayments.com/"), Some("TransactionStatus"), __scope, false),
-        scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
-        scalaxb.toXML[Option[BigDecimal]](__obj.BeagleScore, Some("https://api.ewaypayments.com/"), Some("BeagleScore"), __scope, false),
-        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
-        __obj.Verification map { scalaxb.toXML[org.birchavenue.eway.VerificationResult](_, Some("https://api.ewaypayments.com/"), Some("Verification"), __scope, false) } getOrElse {Nil})
-
-  }
-
-  trait DefaultEwayVerificationResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.VerificationResult] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    override def typeName: Option[String] = Some("VerificationResult")
-
-    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.VerificationResult] =
-      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CVN")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Address")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
-      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ^^
-      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
-      org.birchavenue.eway.VerificationResult(scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p1, scalaxb.ElemName(node) :: stack),
-        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p2, scalaxb.ElemName(node) :: stack),
-        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p3, scalaxb.ElemName(node) :: stack),
-        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p4, scalaxb.ElemName(node) :: stack),
-        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p5, scalaxb.ElemName(node) :: stack)) })
-    
-    def writesChildNodes(__obj: org.birchavenue.eway.VerificationResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
-      Seq.concat(scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.CVN, Some("https://api.ewaypayments.com/"), Some("CVN"), __scope, false),
-        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Address, Some("https://api.ewaypayments.com/"), Some("Address"), __scope, false),
-        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Email, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false),
-        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Mobile, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false),
-        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Phone, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false))
-
-  }
-
-  def buildEwayVerificationStatusFormat = new DefaultEwayVerificationStatusFormat {}
-  trait DefaultEwayVerificationStatusFormat extends scalaxb.XMLFormat[org.birchavenue.eway.VerificationStatus] {
-    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    
-    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.VerificationStatus] =
-      Right(org.birchavenue.eway.VerificationStatus.fromString(seq.text))
-    
-    def writes(__obj: org.birchavenue.eway.VerificationStatus, __namespace: Option[String], __elementLabel: Option[String],
-        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
-      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
-        __elementLabel getOrElse { sys.error("missing element label.") },
-        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
-  }
-
-
-  trait Rapid30Soap12Bindings { this: scalaxb.SoapClients =>
-    val endpoint: String
-    lazy val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
-    lazy val service: org.birchavenue.eway.Rapid30Soap = new Rapid30Soap12Binding {}
-    def baseAddress = new java.net.URI(endpoint)
-    // def baseAddress = new java.net.URI("https://api.ewaypayments.com/soap.asmx")
-
-    trait Rapid30Soap12Binding extends org.birchavenue.eway.Rapid30Soap {
-      def createAccessCode(request: Option[org.birchavenue.eway.CreateAccessCodeRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.CreateAccessCodeResponse] = 
-        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.CreateAccessCode(request), Some("https://api.ewaypayments.com/"), "CreateAccessCode", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/CreateAccessCode"))) match {
-          case Left(x)  => Left(x)
-          case Right((header, body)) =>
-            Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponse](body.headOption getOrElse {body}))
-        }
-      def getAccessCodeResult(request: Option[org.birchavenue.eway.GetAccessCodeResultRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.GetAccessCodeResultResponse] = 
-        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.GetAccessCodeResult(request), Some("https://api.ewaypayments.com/"), "GetAccessCodeResult", defaultScope),
-            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/GetAccessCodeResult"))) match {
-          case Left(x)  => Left(x)
-          case Right((header, body)) =>
-            Right(scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultResponse](body.headOption getOrElse {body}))
-        }
-    }
-  }
-
+  implicit lazy val EwayCreateAccessCodeFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCode] = new DefaultEwayCreateAccessCodeFormat {}
+  implicit lazy val EwayCreateAccessCodeRequestableFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeRequestable] = new DefaultEwayCreateAccessCodeRequestableFormat {}
+  implicit lazy val EwayCreateAccessCodeRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeRequest] = new DefaultEwayCreateAccessCodeRequestFormat {}
+  implicit lazy val EwayBaseRequestableFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseRequestable] = new DefaultEwayBaseRequestableFormat {}
+  implicit lazy val EwayBaseRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseRequest] = new DefaultEwayBaseRequestFormat {}
+  implicit lazy val EwayCustomerableFormat: scalaxb.XMLFormat[org.birchavenue.eway.Customerable] = new DefaultEwayCustomerableFormat {}
+  implicit lazy val EwayCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.Customer] = new DefaultEwayCustomerFormat {}
+  implicit lazy val EwayTokenCustomerableFormat: scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomerable] = new DefaultEwayTokenCustomerableFormat {}
+  implicit lazy val EwayTokenCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomer] = new DefaultEwayTokenCustomerFormat {}
+  implicit lazy val EwayTokenCustomerableSequence1Format: scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomerableSequence1] = new DefaultEwayTokenCustomerableSequence1Format {}
+  implicit lazy val EwayShippingAddressFormat: scalaxb.XMLFormat[org.birchavenue.eway.ShippingAddress] = new DefaultEwayShippingAddressFormat {}
+  implicit lazy val EwayArrayOfLineItemFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfLineItem] = new DefaultEwayArrayOfLineItemFormat {}
+  implicit lazy val EwayLineItemFormat: scalaxb.XMLFormat[org.birchavenue.eway.LineItem] = new DefaultEwayLineItemFormat {}
+  implicit lazy val EwayArrayOfOptionFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfOption] = new DefaultEwayArrayOfOptionFormat {}
+  implicit lazy val EwayOptionTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.OptionType] = new DefaultEwayOptionTypeFormat {}
+  implicit lazy val EwayPaymentableFormat: scalaxb.XMLFormat[org.birchavenue.eway.Paymentable] = new DefaultEwayPaymentableFormat {}
+  implicit lazy val EwayPaymentFormat: scalaxb.XMLFormat[org.birchavenue.eway.Payment] = new DefaultEwayPaymentFormat {}
+  implicit lazy val EwayMethodFormat: scalaxb.XMLFormat[org.birchavenue.eway.Method] = new DefaultEwayMethodFormat {}
+  implicit lazy val EwayTransactionTypesFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionTypes] = new DefaultEwayTransactionTypesFormat {}
+  implicit lazy val EwayCreateAccessCodeResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeResponse] = new DefaultEwayCreateAccessCodeResponseFormat {}
+  implicit lazy val EwayCreateAccessCodeResponsableFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeResponsable] = new DefaultEwayCreateAccessCodeResponsableFormat {}
+  implicit lazy val EwayCreateAccessCodeResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeResponseType] = new DefaultEwayCreateAccessCodeResponseTypeFormat {}
+  implicit lazy val EwayBaseResponsableFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseResponsable] = new DefaultEwayBaseResponsableFormat {}
+  implicit lazy val EwayBaseResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.BaseResponse] = new DefaultEwayBaseResponseFormat {}
+  implicit lazy val EwayCreateAccessCodeSharedFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeShared] = new DefaultEwayCreateAccessCodeSharedFormat {}
+  implicit lazy val EwayCreateAccessCodeSharedRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeSharedRequest] = new DefaultEwayCreateAccessCodeSharedRequestFormat {}
+  implicit lazy val EwayAllowedCardsFormat: scalaxb.XMLFormat[org.birchavenue.eway.AllowedCards] = new DefaultEwayAllowedCardsFormat {}
+  implicit lazy val EwayCustomViewFormat: scalaxb.XMLFormat[org.birchavenue.eway.CustomView] = new DefaultEwayCustomViewFormat {}
+  implicit lazy val EwayCreateAccessCodeSharedResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeSharedResponse] = new DefaultEwayCreateAccessCodeSharedResponseFormat {}
+  implicit lazy val EwayCreateAccessCodeSharedResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeSharedResponseType] = new DefaultEwayCreateAccessCodeSharedResponseTypeFormat {}
+  implicit lazy val EwayGetAccessCodeResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResult] = new DefaultEwayGetAccessCodeResultFormat {}
+  implicit lazy val EwayGetAccessCodeResultRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResultRequest] = new DefaultEwayGetAccessCodeResultRequestFormat {}
+  implicit lazy val EwayGetAccessCodeResultResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResultResponse] = new DefaultEwayGetAccessCodeResultResponseFormat {}
+  implicit lazy val EwayGetAccessCodeResultResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.GetAccessCodeResultResponseType] = new DefaultEwayGetAccessCodeResultResponseTypeFormat {}
+  implicit lazy val EwayVerificationResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.VerificationResult] = new DefaultEwayVerificationResultFormat {}
+  implicit lazy val EwayVerificationStatusFormat: scalaxb.XMLFormat[org.birchavenue.eway.VerificationStatus] = new DefaultEwayVerificationStatusFormat {}
+  implicit lazy val EwayBeagleVerifyResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.BeagleVerifyResult] = new DefaultEwayBeagleVerifyResultFormat {}
+  implicit lazy val EwayBeagleVerifyStatusFormat: scalaxb.XMLFormat[org.birchavenue.eway.BeagleVerifyStatus] = new DefaultEwayBeagleVerifyStatusFormat {}
+  implicit lazy val EwayDirectPaymentFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectPayment] = new DefaultEwayDirectPaymentFormat {}
+  implicit lazy val EwayDirectPaymentRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectPaymentRequest] = new DefaultEwayDirectPaymentRequestFormat {}
+  implicit lazy val EwayDirectTokenCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectTokenCustomer] = new DefaultEwayDirectTokenCustomerFormat {}
+  implicit lazy val EwayCardDetailsFormat: scalaxb.XMLFormat[org.birchavenue.eway.CardDetails] = new DefaultEwayCardDetailsFormat {}
+  implicit lazy val EwayDirectPaymentResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectPaymentResponse] = new DefaultEwayDirectPaymentResponseFormat {}
+  implicit lazy val EwayDirectPaymentResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectPaymentResponseType] = new DefaultEwayDirectPaymentResponseTypeFormat {}
+  implicit lazy val EwayDirectCustomerCreateFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerCreate] = new DefaultEwayDirectCustomerCreateFormat {}
+  implicit lazy val EwayDirectCustomerRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerRequest] = new DefaultEwayDirectCustomerRequestFormat {}
+  implicit lazy val EwayDirectCustomerCreateResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerCreateResponse] = new DefaultEwayDirectCustomerCreateResponseFormat {}
+  implicit lazy val EwayDirectCustomerResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerResponse] = new DefaultEwayDirectCustomerResponseFormat {}
+  implicit lazy val EwayDirectCustomerUpdateFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerUpdate] = new DefaultEwayDirectCustomerUpdateFormat {}
+  implicit lazy val EwayDirectCustomerUpdateResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerUpdateResponse] = new DefaultEwayDirectCustomerUpdateResponseFormat {}
+  implicit lazy val EwayDirectRefundFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectRefund] = new DefaultEwayDirectRefundFormat {}
+  implicit lazy val EwayDirectRefundRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectRefundRequest] = new DefaultEwayDirectRefundRequestFormat {}
+  implicit lazy val EwayRefundFormat: scalaxb.XMLFormat[org.birchavenue.eway.Refund] = new DefaultEwayRefundFormat {}
+  implicit lazy val EwayDirectRefundResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectRefundResponse] = new DefaultEwayDirectRefundResponseFormat {}
+  implicit lazy val EwayDirectRefundResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectRefundResponseType] = new DefaultEwayDirectRefundResponseTypeFormat {}
+  implicit lazy val EwayDirectCustomerSearchFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerSearch] = new DefaultEwayDirectCustomerSearchFormat {}
+  implicit lazy val EwayDirectCustomerSearchRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerSearchRequest] = new DefaultEwayDirectCustomerSearchRequestFormat {}
+  implicit lazy val EwayCustomerFilterFormat: scalaxb.XMLFormat[org.birchavenue.eway.CustomerFilter] = new DefaultEwayCustomerFilterFormat {}
+  implicit lazy val EwayFilterMatchTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.FilterMatchType] = new DefaultEwayFilterMatchTypeFormat {}
+  implicit lazy val EwayDirectCustomerSearchResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerSearchResponse] = new DefaultEwayDirectCustomerSearchResponseFormat {}
+  implicit lazy val EwayDirectCustomerSearchResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.DirectCustomerSearchResponseType] = new DefaultEwayDirectCustomerSearchResponseTypeFormat {}
+  implicit lazy val EwayArrayOfDirectTokenCustomerFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfDirectTokenCustomer] = new DefaultEwayArrayOfDirectTokenCustomerFormat {}
+  implicit lazy val EwayTransactionSearchFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionSearch] = new DefaultEwayTransactionSearchFormat {}
+  implicit lazy val EwayTransactionSearchRequestFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionSearchRequest] = new DefaultEwayTransactionSearchRequestFormat {}
+  implicit lazy val EwayTransactionFilterFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionFilter] = new DefaultEwayTransactionFilterFormat {}
+  implicit lazy val EwayTransactionSearchResponseFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionSearchResponse] = new DefaultEwayTransactionSearchResponseFormat {}
+  implicit lazy val EwayTransactionSearchResponseTypeFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionSearchResponseType] = new DefaultEwayTransactionSearchResponseTypeFormat {}
+  implicit lazy val EwayArrayOfTransactionResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.ArrayOfTransactionResult] = new DefaultEwayArrayOfTransactionResultFormat {}
+  implicit lazy val EwayTransactionResultFormat: scalaxb.XMLFormat[org.birchavenue.eway.TransactionResult] = new DefaultEwayTransactionResultFormat {}
 
   trait DefaultEwayCreateCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateCustomer] {
     val targetNamespace: Option[String] = Some("https://www.eway.com.au/gateway/managedpayment/test")
@@ -808,7 +176,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
     
     def writes(__obj: org.birchavenue.eway.CreateCustomerSequence1, __namespace: Option[String], __elementLabel: Option[String], 
         __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
-      Seq.concat(scalaxb.toXML[Option[String]](__obj.Title, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false),
+      Seq.concat(__obj.Title map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("Title"), __scope, false) } getOrElse {Nil},
         __obj.FirstName map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("FirstName"), __scope, false) } getOrElse {Nil},
         __obj.LastName map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("LastName"), __scope, false) } getOrElse {Nil},
         __obj.Address map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("Address"), __scope, false) } getOrElse {Nil},
@@ -971,7 +339,7 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
     def writes(__obj: org.birchavenue.eway.UpdateCustomerSequence1, __namespace: Option[String], __elementLabel: Option[String], 
         __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
       Seq.concat(scalaxb.toXML[Long](__obj.managedCustomerID, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("managedCustomerID"), __scope, false),
-        scalaxb.toXML[Option[String]](__obj.Title, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false),
+        __obj.Title map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("Title"), __scope, false) } getOrElse {Nil},
         __obj.FirstName map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("FirstName"), __scope, false) } getOrElse {Nil},
         __obj.LastName map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("LastName"), __scope, false) } getOrElse {Nil},
         __obj.Address map { scalaxb.toXML[String](_, Some("https://www.eway.com.au/gateway/managedpayment/test"), Some("Address"), __scope, false) } getOrElse {Nil},
@@ -1514,6 +882,1775 @@ trait XMLProtocol extends scalaxb.XMLStandardTypes {
           case Left(x)  => Left(x)
           case Right((header, body)) =>
             Right(scalaxb.fromXML[org.birchavenue.eway.QueryPaymentResponse](body.headOption getOrElse {body}))
+        }
+    }
+  }
+
+
+  trait DefaultEwayCreateAccessCodeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCode] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCode] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.CreateAccessCode(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeRequestable](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCode, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Option[org.birchavenue.eway.CreateAccessCodeRequestable]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
+
+  }
+
+  trait DefaultEwayCreateAccessCodeRequestableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeRequestable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.CreateAccessCodeRequestable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeSharedRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedRequest](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeRequest](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.CreateAccessCodeRequestable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.CreateAccessCodeSharedRequest => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeSharedRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.CreateAccessCodeRequest => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeRequest](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayCreateAccessCodeRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("CreateAccessCodeRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingAddress")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Items")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "RedirectUrl")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerIP")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DeviceID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PartnerID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Method")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionType")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 =>
+      org.birchavenue.eway.CreateAccessCodeRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.Customerable](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.ShippingAddress](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfLineItem](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[org.birchavenue.eway.Paymentable](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[org.birchavenue.eway.Method](p10, scalaxb.ElemName(node) :: stack),
+        p11.headOption map { scalaxb.fromXML[org.birchavenue.eway.TransactionTypes](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Customer map { scalaxb.toXML[org.birchavenue.eway.Customerable](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.ShippingAddress map { scalaxb.toXML[org.birchavenue.eway.ShippingAddress](_, Some("https://api.ewaypayments.com/"), Some("ShippingAddress"), __scope, false) } getOrElse {Nil},
+        __obj.Items map { scalaxb.toXML[org.birchavenue.eway.ArrayOfLineItem](_, Some("https://api.ewaypayments.com/"), Some("Items"), __scope, false) } getOrElse {Nil},
+        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
+        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Paymentable](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
+        __obj.RedirectUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("RedirectUrl"), __scope, false) } getOrElse {Nil},
+        __obj.CustomerIP map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CustomerIP"), __scope, false) } getOrElse {Nil},
+        __obj.DeviceID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("DeviceID"), __scope, false) } getOrElse {Nil},
+        __obj.PartnerID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PartnerID"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.Method](__obj.Method, Some("https://api.ewaypayments.com/"), Some("Method"), __scope, false),
+        __obj.TransactionType map { scalaxb.toXML[org.birchavenue.eway.TransactionTypes](_, Some("https://api.ewaypayments.com/"), Some("TransactionType"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayBaseRequestableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BaseRequestable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BaseRequestable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeRequestable](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeSharedRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedRequest](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("GetAccessCodeResultRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultRequest](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectPaymentRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectPaymentRequest](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectCustomerRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerRequest](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectRefundRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectRefundRequest](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectCustomerSearchRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerSearchRequest](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("TransactionSearchRequest")) => Right(scalaxb.fromXML[org.birchavenue.eway.TransactionSearchRequest](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.BaseRequest](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.BaseRequestable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.CreateAccessCodeRequestable => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeRequestable](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.GetAccessCodeResultRequest => scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectPaymentRequest => scalaxb.toXML[org.birchavenue.eway.DirectPaymentRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectCustomerRequest => scalaxb.toXML[org.birchavenue.eway.DirectCustomerRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectRefundRequest => scalaxb.toXML[org.birchavenue.eway.DirectRefundRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectCustomerSearchRequest => scalaxb.toXML[org.birchavenue.eway.DirectCustomerSearchRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.TransactionSearchRequest => scalaxb.toXML[org.birchavenue.eway.TransactionSearchRequest](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.BaseRequest => scalaxb.toXML[org.birchavenue.eway.BaseRequest](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayBaseRequestFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BaseRequest] with scalaxb.CanWriteChildNodes[org.birchavenue.eway.BaseRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    import scalaxb.ElemName._
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BaseRequest] = seq match {
+      case node: scala.xml.Node => Right(org.birchavenue.eway.BaseRequest())
+      case _ => Left("reads failed: seq must be scala.xml.Node")
+    }
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.BaseRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Nil
+
+
+  }
+
+  trait DefaultEwayCustomerableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.Customerable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.Customerable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("TokenCustomer")) => Right(scalaxb.fromXML[org.birchavenue.eway.TokenCustomerable](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectTokenCustomer")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.Customer](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.Customerable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.TokenCustomerable => scalaxb.toXML[org.birchavenue.eway.TokenCustomerable](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.Customer => scalaxb.toXML[org.birchavenue.eway.Customer](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.Customer] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("Customer")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.Customer] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Reference")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Title")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CompanyName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "JobDescription")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Comments")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Url")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 ~ p16 ~ p17 ~ p18 ~ p19 =>
+      org.birchavenue.eway.Customer(p1.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p13.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p14.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p15.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p16.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p17.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p18.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p19.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.Customer, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
+        __obj.Reference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Reference"), __scope, false) } getOrElse {Nil},
+        __obj.Title map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false) } getOrElse {Nil},
+        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
+        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
+        __obj.CompanyName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CompanyName"), __scope, false) } getOrElse {Nil},
+        __obj.JobDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("JobDescription"), __scope, false) } getOrElse {Nil},
+        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
+        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
+        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
+        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
+        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
+        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
+        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
+        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
+        __obj.Mobile map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false) } getOrElse {Nil},
+        __obj.Comments map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Comments"), __scope, false) } getOrElse {Nil},
+        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil},
+        __obj.Url map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Url"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayTokenCustomerableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomerable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.TokenCustomerable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("DirectTokenCustomer")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.TokenCustomer](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.TokenCustomerable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.DirectTokenCustomer => scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.TokenCustomer => scalaxb.toXML[org.birchavenue.eway.TokenCustomer](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayTokenCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TokenCustomer] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("TokenCustomer")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TokenCustomer] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Reference")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Title")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CompanyName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "JobDescription")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Comments")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Url")) ~ 
+      ((opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardStartMonth")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardStartYear")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardIssueNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardExpiryMonth")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardExpiryYear")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "IsActive"))) ^^ 
+        { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 => org.birchavenue.eway.TokenCustomerableSequence1(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) }) }) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 ~ p16 ~ p17 ~ p18 ~ p19 ~ p20 =>
+      org.birchavenue.eway.TokenCustomer(p1.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p13.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p14.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p15.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p16.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p17.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p18.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p19.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p20) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TokenCustomer, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
+        __obj.Reference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Reference"), __scope, false) } getOrElse {Nil},
+        __obj.Title map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false) } getOrElse {Nil},
+        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
+        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
+        __obj.CompanyName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CompanyName"), __scope, false) } getOrElse {Nil},
+        __obj.JobDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("JobDescription"), __scope, false) } getOrElse {Nil},
+        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
+        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
+        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
+        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
+        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
+        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
+        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
+        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
+        __obj.Mobile map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false) } getOrElse {Nil},
+        __obj.Comments map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Comments"), __scope, false) } getOrElse {Nil},
+        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil},
+        __obj.Url map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Url"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.TokenCustomerableSequence1](__obj.tokencustomerablesequence1, None, Some("tokencustomerablesequence1"), __scope, false))
+
+  }
+
+  trait DefaultEwayTokenCustomerableSequence1Format extends scalaxb.XMLFormat[org.birchavenue.eway.TokenCustomerableSequence1] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.TokenCustomerableSequence1] = Left("don't call me.")
+    
+    def writes(__obj: org.birchavenue.eway.TokenCustomerableSequence1, __namespace: Option[String], __elementLabel: Option[String], 
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      Seq.concat(__obj.CardNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardNumber"), __scope, false) } getOrElse {Nil},
+        __obj.CardStartMonth map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardStartMonth"), __scope, false) } getOrElse {Nil},
+        __obj.CardStartYear map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardStartYear"), __scope, false) } getOrElse {Nil},
+        __obj.CardIssueNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardIssueNumber"), __scope, false) } getOrElse {Nil},
+        __obj.CardName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardName"), __scope, false) } getOrElse {Nil},
+        __obj.CardExpiryMonth map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardExpiryMonth"), __scope, false) } getOrElse {Nil},
+        __obj.CardExpiryYear map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CardExpiryYear"), __scope, false) } getOrElse {Nil},
+        __obj.IsActive map { scalaxb.toXML[Boolean](_, Some("https://api.ewaypayments.com/"), Some("IsActive"), __scope, false) } getOrElse {Nil})
+
+
+  }
+
+  trait DefaultEwayShippingAddressFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ShippingAddress] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("ShippingAddress")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ShippingAddress] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingMethod")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 =>
+      org.birchavenue.eway.ShippingAddress(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.ShippingAddress, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.ShippingMethod map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ShippingMethod"), __scope, false) } getOrElse {Nil},
+        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
+        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
+        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
+        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
+        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
+        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
+        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
+        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
+        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
+        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
+        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayArrayOfLineItemFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ArrayOfLineItem] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("ArrayOfLineItem")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ArrayOfLineItem] =
+      phrase(rep(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LineItem")) ^^
+      { case p1 =>
+      org.birchavenue.eway.ArrayOfLineItem(p1.toSeq map { _.nilOption map { scalaxb.fromXML[org.birchavenue.eway.LineItem](_, scalaxb.ElemName(node) :: stack) }}: _*) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.ArrayOfLineItem, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.LineItem flatMap { scalaxb.toXML[Option[org.birchavenue.eway.LineItem]](_, Some("https://api.ewaypayments.com/"), Some("LineItem"), __scope, false) })
+
+  }
+
+  trait DefaultEwayLineItemFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.LineItem] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("LineItem")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.LineItem] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "SKU")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Description")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Quantity")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "UnitCost")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Tax")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Total")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 =>
+      org.birchavenue.eway.LineItem(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p4.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p5.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p6.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.LineItem, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.SKU map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("SKU"), __scope, false) } getOrElse {Nil},
+        __obj.Description map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Description"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[Int]](__obj.Quantity, Some("https://api.ewaypayments.com/"), Some("Quantity"), __scope, false),
+        scalaxb.toXML[Option[Int]](__obj.UnitCost, Some("https://api.ewaypayments.com/"), Some("UnitCost"), __scope, false),
+        scalaxb.toXML[Option[Int]](__obj.Tax, Some("https://api.ewaypayments.com/"), Some("Tax"), __scope, false),
+        scalaxb.toXML[Option[Int]](__obj.Total, Some("https://api.ewaypayments.com/"), Some("Total"), __scope, false))
+
+  }
+
+  trait DefaultEwayArrayOfOptionFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ArrayOfOption] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("ArrayOfOption")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ArrayOfOption] =
+      phrase(rep(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Option")) ^^
+      { case p1 =>
+      org.birchavenue.eway.ArrayOfOption(p1.toSeq map { _.nilOption map { scalaxb.fromXML[org.birchavenue.eway.OptionType](_, scalaxb.ElemName(node) :: stack) }}: _*) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.ArrayOfOption, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.Option flatMap { scalaxb.toXML[Option[org.birchavenue.eway.OptionType]](_, Some("https://api.ewaypayments.com/"), Some("Option"), __scope, false) })
+
+  }
+
+  trait DefaultEwayOptionTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.OptionType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("Option")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.OptionType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Value")) ^^
+      { case p1 =>
+      org.birchavenue.eway.OptionType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.OptionType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.Value map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Value"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayPaymentableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.Paymentable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.Paymentable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("Refund")) => Right(scalaxb.fromXML[org.birchavenue.eway.Refund](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.Payment](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.Paymentable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.Refund => scalaxb.toXML[org.birchavenue.eway.Refund](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.Payment => scalaxb.toXML[org.birchavenue.eway.Payment](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayPaymentFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.Payment] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("Payment")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.Payment] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TotalAmount")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceDescription")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceReference")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CurrencyCode")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
+      org.birchavenue.eway.Payment(scalaxb.fromXML[Int](p1, scalaxb.ElemName(node) :: stack),
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.Payment, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[Int](__obj.TotalAmount, Some("https://api.ewaypayments.com/"), Some("TotalAmount"), __scope, false),
+        __obj.InvoiceNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceNumber"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceDescription"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceReference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceReference"), __scope, false) } getOrElse {Nil},
+        __obj.CurrencyCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CurrencyCode"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  def buildEwayMethodFormat = new DefaultEwayMethodFormat {}
+  trait DefaultEwayMethodFormat extends scalaxb.XMLFormat[org.birchavenue.eway.Method] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.Method] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.Method.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.Method.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.Method, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  def buildEwayTransactionTypesFormat = new DefaultEwayTransactionTypesFormat {}
+  trait DefaultEwayTransactionTypesFormat extends scalaxb.XMLFormat[org.birchavenue.eway.TransactionTypes] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.TransactionTypes] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.TransactionTypes.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.TransactionTypes.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.TransactionTypes, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  trait DefaultEwayCreateAccessCodeResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CreateAccessCodeResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.CreateAccessCodeResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponsable](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.CreateAccessCodeResult map { scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeResponsable](_, Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayCreateAccessCodeResponsableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.CreateAccessCodeResponsable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.CreateAccessCodeResponsable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeSharedResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedResponseType](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponseType](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.CreateAccessCodeResponsable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.CreateAccessCodeSharedResponseType => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeSharedResponseType](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.CreateAccessCodeResponseType => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeResponseType](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayCreateAccessCodeResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("CreateAccessCodeResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FormActionURL")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
+      org.birchavenue.eway.CreateAccessCodeResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.TokenCustomerable](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.Paymentable](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.TokenCustomerable](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Paymentable](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
+        __obj.FormActionURL map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FormActionURL"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayBaseResponsableFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BaseResponsable] {
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BaseResponsable] = seq match {
+      case node: scala.xml.Node =>     
+        scalaxb.Helper.instanceType(node) match {
+          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponsable](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeSharedResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedResponseType](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("GetAccessCodeResultResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultResponseType](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectPaymentResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectPaymentResponseType](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectCustomerResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerResponse](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectRefundResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectRefundResponseType](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("DirectCustomerSearchResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerSearchResponseType](node, stack))
+          case (Some("https://api.ewaypayments.com/"), Some("TransactionSearchResponse")) => Right(scalaxb.fromXML[org.birchavenue.eway.TransactionSearchResponseType](node, stack))
+          case _ => Right(scalaxb.fromXML[org.birchavenue.eway.BaseResponse](node, stack))
+        }
+      case _ => Left("reads failed: seq must be scala.xml.Node")  
+    }
+    
+    def writes(__obj: org.birchavenue.eway.BaseResponsable, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq = __obj match {
+      case x: org.birchavenue.eway.CreateAccessCodeResponsable => scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeResponsable](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.GetAccessCodeResultResponseType => scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultResponseType](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectPaymentResponseType => scalaxb.toXML[org.birchavenue.eway.DirectPaymentResponseType](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectCustomerResponse => scalaxb.toXML[org.birchavenue.eway.DirectCustomerResponse](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectRefundResponseType => scalaxb.toXML[org.birchavenue.eway.DirectRefundResponseType](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.DirectCustomerSearchResponseType => scalaxb.toXML[org.birchavenue.eway.DirectCustomerSearchResponseType](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.TransactionSearchResponseType => scalaxb.toXML[org.birchavenue.eway.TransactionSearchResponseType](x, __namespace, __elementLabel, __scope, true)
+      case x: org.birchavenue.eway.BaseResponse => scalaxb.toXML[org.birchavenue.eway.BaseResponse](x, __namespace, __elementLabel, __scope, false)
+    }
+  }
+
+  trait DefaultEwayBaseResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.BaseResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("BaseResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.BaseResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ^^
+      { case p1 =>
+      org.birchavenue.eway.BaseResponse(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.BaseResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayCreateAccessCodeSharedFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeShared] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeShared] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.CreateAccessCodeShared(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeShared, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Option[org.birchavenue.eway.CreateAccessCodeSharedRequest]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
+
+  }
+
+  trait DefaultEwayCreateAccessCodeSharedRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeSharedRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("CreateAccessCodeSharedRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeSharedRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingAddress")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Items")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "RedirectUrl")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerIP")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DeviceID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PartnerID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Method")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionType")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerReadOnly")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "VerifyCustomerPhone")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "VerifyCustomerEmail")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CancelUrl")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LogoUrl")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FooterText")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "HeaderText")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Language")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AllowedCards")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomView")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 ~ p16 ~ p17 ~ p18 ~ p19 ~ p20 ~ p21 =>
+      org.birchavenue.eway.CreateAccessCodeSharedRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.Customerable](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.ShippingAddress](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfLineItem](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[org.birchavenue.eway.Paymentable](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[org.birchavenue.eway.Method](p10, scalaxb.ElemName(node) :: stack),
+        p11.headOption map { scalaxb.fromXML[org.birchavenue.eway.TransactionTypes](_, scalaxb.ElemName(node) :: stack) },
+        p12.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p13.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p14.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p15.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p16.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p17.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p18.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p19.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p20.headOption map { scalaxb.fromXML[Seq[org.birchavenue.eway.AllowedCards]](_, scalaxb.ElemName(node) :: stack) },
+        p21.nilOption map { scalaxb.fromXML[org.birchavenue.eway.CustomView](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeSharedRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Customer map { scalaxb.toXML[org.birchavenue.eway.Customerable](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.ShippingAddress map { scalaxb.toXML[org.birchavenue.eway.ShippingAddress](_, Some("https://api.ewaypayments.com/"), Some("ShippingAddress"), __scope, false) } getOrElse {Nil},
+        __obj.Items map { scalaxb.toXML[org.birchavenue.eway.ArrayOfLineItem](_, Some("https://api.ewaypayments.com/"), Some("Items"), __scope, false) } getOrElse {Nil},
+        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
+        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Paymentable](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
+        __obj.RedirectUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("RedirectUrl"), __scope, false) } getOrElse {Nil},
+        __obj.CustomerIP map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CustomerIP"), __scope, false) } getOrElse {Nil},
+        __obj.DeviceID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("DeviceID"), __scope, false) } getOrElse {Nil},
+        __obj.PartnerID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PartnerID"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.Method](__obj.Method, Some("https://api.ewaypayments.com/"), Some("Method"), __scope, false),
+        __obj.TransactionType map { scalaxb.toXML[org.birchavenue.eway.TransactionTypes](_, Some("https://api.ewaypayments.com/"), Some("TransactionType"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[Boolean]](__obj.CustomerReadOnly, Some("https://api.ewaypayments.com/"), Some("CustomerReadOnly"), __scope, false),
+        scalaxb.toXML[Option[Boolean]](__obj.VerifyCustomerPhone, Some("https://api.ewaypayments.com/"), Some("VerifyCustomerPhone"), __scope, false),
+        scalaxb.toXML[Option[Boolean]](__obj.VerifyCustomerEmail, Some("https://api.ewaypayments.com/"), Some("VerifyCustomerEmail"), __scope, false),
+        __obj.CancelUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CancelUrl"), __scope, false) } getOrElse {Nil},
+        __obj.LogoUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LogoUrl"), __scope, false) } getOrElse {Nil},
+        __obj.FooterText map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FooterText"), __scope, false) } getOrElse {Nil},
+        __obj.HeaderText map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("HeaderText"), __scope, false) } getOrElse {Nil},
+        __obj.Language map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Language"), __scope, false) } getOrElse {Nil},
+        __obj.AllowedCards map { scalaxb.toXML[Seq[org.birchavenue.eway.AllowedCards]](_, Some("https://api.ewaypayments.com/"), Some("AllowedCards"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[org.birchavenue.eway.CustomView]](__obj.CustomView, Some("https://api.ewaypayments.com/"), Some("CustomView"), __scope, false))
+
+  }
+
+  def buildEwayAllowedCardsFormat = new DefaultEwayAllowedCardsFormat {}
+  trait DefaultEwayAllowedCardsFormat extends scalaxb.XMLFormat[org.birchavenue.eway.AllowedCards] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.AllowedCards] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.AllowedCards.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.AllowedCards.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.AllowedCards, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  def buildEwayCustomViewFormat = new DefaultEwayCustomViewFormat {}
+  trait DefaultEwayCustomViewFormat extends scalaxb.XMLFormat[org.birchavenue.eway.CustomView] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.CustomView] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.CustomView.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.CustomView.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.CustomView, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  trait DefaultEwayCreateAccessCodeSharedResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeSharedResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeSharedResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CreateAccessCodeSharedResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.CreateAccessCodeSharedResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedResponseType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeSharedResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.CreateAccessCodeSharedResult map { scalaxb.toXML[org.birchavenue.eway.CreateAccessCodeSharedResponseType](_, Some("https://api.ewaypayments.com/"), Some("CreateAccessCodeSharedResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayCreateAccessCodeSharedResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CreateAccessCodeSharedResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("CreateAccessCodeSharedResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CreateAccessCodeSharedResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FormActionURL")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "SharedPaymentUrl")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 =>
+      org.birchavenue.eway.CreateAccessCodeSharedResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.TokenCustomerable](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.Paymentable](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CreateAccessCodeSharedResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.TokenCustomerable](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Paymentable](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
+        __obj.FormActionURL map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FormActionURL"), __scope, false) } getOrElse {Nil},
+        __obj.SharedPaymentUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("SharedPaymentUrl"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayGetAccessCodeResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResult] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResult] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.GetAccessCodeResult(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.request map { scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultRequest](_, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayGetAccessCodeResultRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResultRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("GetAccessCodeResultRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResultRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ^^
+      { case p1 =>
+      org.birchavenue.eway.GetAccessCodeResultRequest(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResultRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayGetAccessCodeResultResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResultResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResultResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "GetAccessCodeResultResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.GetAccessCodeResultResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultResponseType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResultResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.GetAccessCodeResultResult map { scalaxb.toXML[org.birchavenue.eway.GetAccessCodeResultResponseType](_, Some("https://api.ewaypayments.com/"), Some("GetAccessCodeResultResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayGetAccessCodeResultResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.GetAccessCodeResultResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("GetAccessCodeResultResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.GetAccessCodeResultResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AuthorisationCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseMessage")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceReference")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TotalAmount")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionStatus")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "BeagleScore")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Verification")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "BeagleVerification")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 =>
+      org.birchavenue.eway.GetAccessCodeResultResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p9.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p10.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p11.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
+        p12.nilOption map { scalaxb.fromXML[BigDecimal](_, scalaxb.ElemName(node) :: stack) },
+        p13.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
+        p14.headOption map { scalaxb.fromXML[org.birchavenue.eway.VerificationResult](_, scalaxb.ElemName(node) :: stack) },
+        p15.headOption map { scalaxb.fromXML[org.birchavenue.eway.BeagleVerifyResult](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.GetAccessCodeResultResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil},
+        __obj.AuthorisationCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AuthorisationCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseMessage map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseMessage"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceNumber"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceReference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceReference"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[Int]](__obj.TotalAmount, Some("https://api.ewaypayments.com/"), Some("TotalAmount"), __scope, false),
+        scalaxb.toXML[Option[Int]](__obj.TransactionID, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false),
+        scalaxb.toXML[Option[Boolean]](__obj.TransactionStatus, Some("https://api.ewaypayments.com/"), Some("TransactionStatus"), __scope, false),
+        scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
+        scalaxb.toXML[Option[BigDecimal]](__obj.BeagleScore, Some("https://api.ewaypayments.com/"), Some("BeagleScore"), __scope, false),
+        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
+        __obj.Verification map { scalaxb.toXML[org.birchavenue.eway.VerificationResult](_, Some("https://api.ewaypayments.com/"), Some("Verification"), __scope, false) } getOrElse {Nil},
+        __obj.BeagleVerification map { scalaxb.toXML[org.birchavenue.eway.BeagleVerifyResult](_, Some("https://api.ewaypayments.com/"), Some("BeagleVerification"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayVerificationResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.VerificationResult] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("VerificationResult")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.VerificationResult] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CVN")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Address")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 =>
+      org.birchavenue.eway.VerificationResult(scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p2, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p3, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p4, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[org.birchavenue.eway.VerificationStatus](p5, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.VerificationResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.CVN, Some("https://api.ewaypayments.com/"), Some("CVN"), __scope, false),
+        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Address, Some("https://api.ewaypayments.com/"), Some("Address"), __scope, false),
+        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Email, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false),
+        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Mobile, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false),
+        scalaxb.toXML[org.birchavenue.eway.VerificationStatus](__obj.Phone, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false))
+
+  }
+
+  def buildEwayVerificationStatusFormat = new DefaultEwayVerificationStatusFormat {}
+  trait DefaultEwayVerificationStatusFormat extends scalaxb.XMLFormat[org.birchavenue.eway.VerificationStatus] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.VerificationStatus] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.VerificationStatus.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.VerificationStatus.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.VerificationStatus, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  trait DefaultEwayBeagleVerifyResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.BeagleVerifyResult] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("BeagleVerifyResult")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.BeagleVerifyResult] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ^^
+      { case p1 ~ p2 =>
+      org.birchavenue.eway.BeagleVerifyResult(scalaxb.fromXML[org.birchavenue.eway.BeagleVerifyStatus](p1, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[org.birchavenue.eway.BeagleVerifyStatus](p2, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.BeagleVerifyResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[org.birchavenue.eway.BeagleVerifyStatus](__obj.Email, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false),
+        scalaxb.toXML[org.birchavenue.eway.BeagleVerifyStatus](__obj.Phone, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false))
+
+  }
+
+  def buildEwayBeagleVerifyStatusFormat = new DefaultEwayBeagleVerifyStatusFormat {}
+  trait DefaultEwayBeagleVerifyStatusFormat extends scalaxb.XMLFormat[org.birchavenue.eway.BeagleVerifyStatus] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.BeagleVerifyStatus] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.BeagleVerifyStatus.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.BeagleVerifyStatus.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.BeagleVerifyStatus, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  trait DefaultEwayDirectPaymentFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectPayment] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectPayment] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectPayment(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectPaymentRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectPayment, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.request map { scalaxb.toXML[org.birchavenue.eway.DirectPaymentRequest](_, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectPaymentRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectPaymentRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectPaymentRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectPaymentRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingAddress")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Items")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "RedirectUrl")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerIP")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DeviceID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PartnerID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Method")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionType")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 =>
+      org.birchavenue.eway.DirectPaymentRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.ShippingAddress](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfLineItem](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[org.birchavenue.eway.Paymentable](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[org.birchavenue.eway.Method](p10, scalaxb.ElemName(node) :: stack),
+        scalaxb.fromXML[org.birchavenue.eway.TransactionTypes](p11, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectPaymentRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Customer map { scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.ShippingAddress map { scalaxb.toXML[org.birchavenue.eway.ShippingAddress](_, Some("https://api.ewaypayments.com/"), Some("ShippingAddress"), __scope, false) } getOrElse {Nil},
+        __obj.Items map { scalaxb.toXML[org.birchavenue.eway.ArrayOfLineItem](_, Some("https://api.ewaypayments.com/"), Some("Items"), __scope, false) } getOrElse {Nil},
+        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
+        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Paymentable](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil},
+        __obj.RedirectUrl map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("RedirectUrl"), __scope, false) } getOrElse {Nil},
+        __obj.CustomerIP map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CustomerIP"), __scope, false) } getOrElse {Nil},
+        __obj.DeviceID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("DeviceID"), __scope, false) } getOrElse {Nil},
+        __obj.PartnerID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PartnerID"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.Method](__obj.Method, Some("https://api.ewaypayments.com/"), Some("Method"), __scope, false),
+        scalaxb.toXML[org.birchavenue.eway.TransactionTypes](__obj.TransactionType, Some("https://api.ewaypayments.com/"), Some("TransactionType"), __scope, false))
+
+  }
+
+  trait DefaultEwayDirectTokenCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectTokenCustomer] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectTokenCustomer")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectTokenCustomer] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Reference")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Title")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "FirstName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "LastName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CompanyName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "JobDescription")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street1")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Street2")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "City")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "State")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PostalCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Country")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Email")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Phone")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Mobile")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Comments")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Fax")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Url")) ~ 
+      ((opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardStartMonth")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardStartYear")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardIssueNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardName")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardExpiryMonth")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardExpiryYear")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "IsActive"))) ^^ 
+        { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 => org.birchavenue.eway.TokenCustomerableSequence1(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) }) }) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CardDetails")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 ~ p16 ~ p17 ~ p18 ~ p19 ~ p20 ~ p21 =>
+      org.birchavenue.eway.DirectTokenCustomer(p1.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p10.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p12.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p13.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p14.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p15.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p16.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p17.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p18.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p19.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p20,
+        p21.headOption map { scalaxb.fromXML[org.birchavenue.eway.CardDetails](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectTokenCustomer, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
+        __obj.Reference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Reference"), __scope, false) } getOrElse {Nil},
+        __obj.Title map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Title"), __scope, false) } getOrElse {Nil},
+        __obj.FirstName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("FirstName"), __scope, false) } getOrElse {Nil},
+        __obj.LastName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("LastName"), __scope, false) } getOrElse {Nil},
+        __obj.CompanyName map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CompanyName"), __scope, false) } getOrElse {Nil},
+        __obj.JobDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("JobDescription"), __scope, false) } getOrElse {Nil},
+        __obj.Street1 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street1"), __scope, false) } getOrElse {Nil},
+        __obj.Street2 map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Street2"), __scope, false) } getOrElse {Nil},
+        __obj.City map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("City"), __scope, false) } getOrElse {Nil},
+        __obj.State map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("State"), __scope, false) } getOrElse {Nil},
+        __obj.PostalCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PostalCode"), __scope, false) } getOrElse {Nil},
+        __obj.Country map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Country"), __scope, false) } getOrElse {Nil},
+        __obj.Email map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Email"), __scope, false) } getOrElse {Nil},
+        __obj.Phone map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Phone"), __scope, false) } getOrElse {Nil},
+        __obj.Mobile map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Mobile"), __scope, false) } getOrElse {Nil},
+        __obj.Comments map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Comments"), __scope, false) } getOrElse {Nil},
+        __obj.Fax map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Fax"), __scope, false) } getOrElse {Nil},
+        __obj.Url map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Url"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.TokenCustomerableSequence1](__obj.tokencustomerablesequence1, None, Some("tokencustomerablesequence1"), __scope, false),
+        __obj.CardDetails map { scalaxb.toXML[org.birchavenue.eway.CardDetails](_, Some("https://api.ewaypayments.com/"), Some("CardDetails"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayCardDetailsFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CardDetails] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("CardDetails")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CardDetails] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Number")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Name")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ExpiryMonth")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ExpiryYear")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "StartMonth")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "StartYear")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "IssueNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CVN")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 =>
+      org.birchavenue.eway.CardDetails(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CardDetails, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Number map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Number"), __scope, false) } getOrElse {Nil},
+        __obj.Name map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Name"), __scope, false) } getOrElse {Nil},
+        __obj.ExpiryMonth map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ExpiryMonth"), __scope, false) } getOrElse {Nil},
+        __obj.ExpiryYear map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ExpiryYear"), __scope, false) } getOrElse {Nil},
+        __obj.StartMonth map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("StartMonth"), __scope, false) } getOrElse {Nil},
+        __obj.StartYear map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("StartYear"), __scope, false) } getOrElse {Nil},
+        __obj.IssueNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("IssueNumber"), __scope, false) } getOrElse {Nil},
+        __obj.CVN map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CVN"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectPaymentResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectPaymentResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectPaymentResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DirectPaymentResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectPaymentResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectPaymentResponseType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectPaymentResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.DirectPaymentResult map { scalaxb.toXML[org.birchavenue.eway.DirectPaymentResponseType](_, Some("https://api.ewaypayments.com/"), Some("DirectPaymentResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectPaymentResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectPaymentResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectPaymentResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectPaymentResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AuthorisationCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseMessage")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionStatus")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionType")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "BeagleScore")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Verification")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Payment")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 =>
+      org.birchavenue.eway.DirectPaymentResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p6.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.nilOption map { scalaxb.fromXML[BigDecimal](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[org.birchavenue.eway.VerificationResult](_, scalaxb.ElemName(node) :: stack) },
+        p10.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[org.birchavenue.eway.Paymentable](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectPaymentResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.AuthorisationCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AuthorisationCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseMessage map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseMessage"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[Int]](__obj.TransactionID, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false),
+        scalaxb.toXML[Option[Boolean]](__obj.TransactionStatus, Some("https://api.ewaypayments.com/"), Some("TransactionStatus"), __scope, false),
+        __obj.TransactionType map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("TransactionType"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[BigDecimal]](__obj.BeagleScore, Some("https://api.ewaypayments.com/"), Some("BeagleScore"), __scope, false),
+        __obj.Verification map { scalaxb.toXML[org.birchavenue.eway.VerificationResult](_, Some("https://api.ewaypayments.com/"), Some("Verification"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.Payment map { scalaxb.toXML[org.birchavenue.eway.Paymentable](_, Some("https://api.ewaypayments.com/"), Some("Payment"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectCustomerCreateFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerCreate] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerCreate] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerCreate(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.DirectCustomerRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerCreate, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Option[org.birchavenue.eway.DirectCustomerRequest]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
+
+  }
+
+  trait DefaultEwayDirectCustomerRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectCustomerRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.Customer map { scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectCustomerCreateResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerCreateResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerCreateResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DirectCustomerCreateResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerCreateResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectCustomerResponse](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerCreateResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.DirectCustomerCreateResult map { scalaxb.toXML[org.birchavenue.eway.DirectCustomerResponse](_, Some("https://api.ewaypayments.com/"), Some("DirectCustomerCreateResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectCustomerResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectCustomerResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ^^
+      { case p1 ~ p2 =>
+      org.birchavenue.eway.DirectCustomerResponse(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectCustomerUpdateFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerUpdate] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerUpdate] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerUpdate(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.DirectCustomerRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerUpdate, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Option[org.birchavenue.eway.DirectCustomerRequest]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
+
+  }
+
+  trait DefaultEwayDirectCustomerUpdateResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerUpdateResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerUpdateResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DirectCustomerUpdateResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerUpdateResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectCustomerResponse](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerUpdateResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.DirectCustomerUpdateResult map { scalaxb.toXML[org.birchavenue.eway.DirectCustomerResponse](_, Some("https://api.ewaypayments.com/"), Some("DirectCustomerUpdateResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectRefundFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectRefund] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectRefund] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectRefund(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectRefundRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectRefund, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.request map { scalaxb.toXML[org.birchavenue.eway.DirectRefundRequest](_, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectRefundRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectRefundRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectRefundRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectRefundRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Refund")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingAddress")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Items")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerIP")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DeviceID")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "PartnerID")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 =>
+      org.birchavenue.eway.DirectRefundRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.Refund](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[org.birchavenue.eway.ShippingAddress](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfLineItem](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectRefundRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Refund map { scalaxb.toXML[org.birchavenue.eway.Refund](_, Some("https://api.ewaypayments.com/"), Some("Refund"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.ShippingAddress map { scalaxb.toXML[org.birchavenue.eway.ShippingAddress](_, Some("https://api.ewaypayments.com/"), Some("ShippingAddress"), __scope, false) } getOrElse {Nil},
+        __obj.Items map { scalaxb.toXML[org.birchavenue.eway.ArrayOfLineItem](_, Some("https://api.ewaypayments.com/"), Some("Items"), __scope, false) } getOrElse {Nil},
+        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
+        __obj.CustomerIP map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CustomerIP"), __scope, false) } getOrElse {Nil},
+        __obj.DeviceID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("DeviceID"), __scope, false) } getOrElse {Nil},
+        __obj.PartnerID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("PartnerID"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayRefundFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.Refund] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("Refund")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.Refund] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TotalAmount")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceDescription")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceReference")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CurrencyCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 =>
+      org.birchavenue.eway.Refund(scalaxb.fromXML[Int](p1, scalaxb.ElemName(node) :: stack),
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.Refund, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[Int](__obj.TotalAmount, Some("https://api.ewaypayments.com/"), Some("TotalAmount"), __scope, false),
+        __obj.InvoiceNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceNumber"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceDescription map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceDescription"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceReference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceReference"), __scope, false) } getOrElse {Nil},
+        __obj.CurrencyCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CurrencyCode"), __scope, false) } getOrElse {Nil},
+        __obj.TransactionID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectRefundResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectRefundResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectRefundResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DirectRefundResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectRefundResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectRefundResponseType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectRefundResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.DirectRefundResult map { scalaxb.toXML[org.birchavenue.eway.DirectRefundResponseType](_, Some("https://api.ewaypayments.com/"), Some("DirectRefundResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectRefundResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectRefundResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectRefundResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectRefundResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AuthorisationCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseMessage")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionStatus")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Verification")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Refund")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 =>
+      org.birchavenue.eway.DirectRefundResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p6.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p7.headOption map { scalaxb.fromXML[org.birchavenue.eway.VerificationResult](_, scalaxb.ElemName(node) :: stack) },
+        p8.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) },
+        p9.headOption map { scalaxb.fromXML[org.birchavenue.eway.Refund](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectRefundResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.AuthorisationCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AuthorisationCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseMessage map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseMessage"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[Int]](__obj.TransactionID, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false),
+        scalaxb.toXML[Option[Boolean]](__obj.TransactionStatus, Some("https://api.ewaypayments.com/"), Some("TransactionStatus"), __scope, false),
+        __obj.Verification map { scalaxb.toXML[org.birchavenue.eway.VerificationResult](_, Some("https://api.ewaypayments.com/"), Some("Verification"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.DirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.Refund map { scalaxb.toXML[org.birchavenue.eway.Refund](_, Some("https://api.ewaypayments.com/"), Some("Refund"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectCustomerSearchFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerSearch] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerSearch] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerSearch(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.DirectCustomerSearchRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerSearch, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Option[org.birchavenue.eway.DirectCustomerSearchRequest]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
+
+  }
+
+  trait DefaultEwayDirectCustomerSearchRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerSearchRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectCustomerSearchRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerSearchRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerFilter")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ^^
+      { case p1 ~ p2 =>
+      org.birchavenue.eway.DirectCustomerSearchRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.CustomerFilter](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[Long](p2, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerSearchRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.CustomerFilter map { scalaxb.toXML[org.birchavenue.eway.CustomerFilter](_, Some("https://api.ewaypayments.com/"), Some("CustomerFilter"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Long](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false))
+
+  }
+
+  trait DefaultEwayCustomerFilterFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.CustomerFilter] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("CustomerFilter")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.CustomerFilter] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerIDMatchType")) ^^
+      { case p1 =>
+      org.birchavenue.eway.CustomerFilter(scalaxb.fromXML[org.birchavenue.eway.FilterMatchType](p1, scalaxb.ElemName(node) :: stack)) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.CustomerFilter, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[org.birchavenue.eway.FilterMatchType](__obj.TokenCustomerIDMatchType, Some("https://api.ewaypayments.com/"), Some("TokenCustomerIDMatchType"), __scope, false))
+
+  }
+
+  def buildEwayFilterMatchTypeFormat = new DefaultEwayFilterMatchTypeFormat {}
+  trait DefaultEwayFilterMatchTypeFormat extends scalaxb.XMLFormat[org.birchavenue.eway.FilterMatchType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def reads(seq: scala.xml.NodeSeq, stack: List[scalaxb.ElemName]): Either[String, org.birchavenue.eway.FilterMatchType] = seq match {
+      case elem: scala.xml.Elem => Right(org.birchavenue.eway.FilterMatchType.fromString(elem.text, elem.scope))
+      case _ => Right(org.birchavenue.eway.FilterMatchType.fromString(seq.text, scala.xml.TopScope))
+    }
+    
+    def writes(__obj: org.birchavenue.eway.FilterMatchType, __namespace: Option[String], __elementLabel: Option[String],
+        __scope: scala.xml.NamespaceBinding, __typeAttribute: Boolean): scala.xml.NodeSeq =
+      scala.xml.Elem(scalaxb.Helper.getPrefix(__namespace, __scope).orNull, 
+        __elementLabel getOrElse { sys.error("missing element label.") },
+        scala.xml.Null, __scope, scala.xml.Text(__obj.toString))
+  }
+
+  trait DefaultEwayDirectCustomerSearchResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerSearchResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerSearchResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DirectCustomerSearchResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.DirectCustomerSearchResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.DirectCustomerSearchResponseType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerSearchResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.DirectCustomerSearchResult map { scalaxb.toXML[org.birchavenue.eway.DirectCustomerSearchResponseType](_, Some("https://api.ewaypayments.com/"), Some("DirectCustomerSearchResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayDirectCustomerSearchResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.DirectCustomerSearchResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("DirectCustomerSearchResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.DirectCustomerSearchResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customers")) ^^
+      { case p1 ~ p2 =>
+      org.birchavenue.eway.DirectCustomerSearchResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfDirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.DirectCustomerSearchResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.Customers map { scalaxb.toXML[org.birchavenue.eway.ArrayOfDirectTokenCustomer](_, Some("https://api.ewaypayments.com/"), Some("Customers"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayArrayOfDirectTokenCustomerFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ArrayOfDirectTokenCustomer] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("ArrayOfDirectTokenCustomer")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ArrayOfDirectTokenCustomer] =
+      phrase(rep(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "DirectTokenCustomer")) ^^
+      { case p1 =>
+      org.birchavenue.eway.ArrayOfDirectTokenCustomer(p1.toSeq map { _.nilOption map { scalaxb.fromXML[org.birchavenue.eway.DirectTokenCustomer](_, scalaxb.ElemName(node) :: stack) }}: _*) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.ArrayOfDirectTokenCustomer, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.DirectTokenCustomer flatMap { scalaxb.toXML[Option[org.birchavenue.eway.DirectTokenCustomer]](_, Some("https://api.ewaypayments.com/"), Some("DirectTokenCustomer"), __scope, false) })
+
+  }
+
+  trait DefaultEwayTransactionSearchFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TransactionSearch] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TransactionSearch] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "request")) ^^
+      { case p1 =>
+      org.birchavenue.eway.TransactionSearch(p1.nilOption map { scalaxb.fromXML[org.birchavenue.eway.TransactionSearchRequest](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TransactionSearch, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (scalaxb.toXML[Option[org.birchavenue.eway.TransactionSearchRequest]](__obj.request, Some("https://api.ewaypayments.com/"), Some("request"), __scope, false))
+
+  }
+
+  trait DefaultEwayTransactionSearchRequestFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TransactionSearchRequest] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("TransactionSearchRequest")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TransactionSearchRequest] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionFilter")) ^^
+      { case p1 =>
+      org.birchavenue.eway.TransactionSearchRequest(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.TransactionFilter](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TransactionSearchRequest, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.TransactionFilter map { scalaxb.toXML[org.birchavenue.eway.TransactionFilter](_, Some("https://api.ewaypayments.com/"), Some("TransactionFilter"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayTransactionFilterFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TransactionFilter] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("TransactionFilter")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TransactionFilter] =
+      phrase((scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionIDMatchType")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCodeMatchType")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AccessCode")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerIDMatchType")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "CustomerID")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 =>
+      org.birchavenue.eway.TransactionFilter(scalaxb.fromXML[org.birchavenue.eway.FilterMatchType](p1, scalaxb.ElemName(node) :: stack),
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[org.birchavenue.eway.FilterMatchType](p3, scalaxb.ElemName(node) :: stack),
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        scalaxb.fromXML[org.birchavenue.eway.FilterMatchType](p5, scalaxb.ElemName(node) :: stack),
+        p6.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TransactionFilter, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(scalaxb.toXML[org.birchavenue.eway.FilterMatchType](__obj.TransactionIDMatchType, Some("https://api.ewaypayments.com/"), Some("TransactionIDMatchType"), __scope, false),
+        __obj.TransactionID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.FilterMatchType](__obj.AccessCodeMatchType, Some("https://api.ewaypayments.com/"), Some("AccessCodeMatchType"), __scope, false),
+        __obj.AccessCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AccessCode"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[org.birchavenue.eway.FilterMatchType](__obj.CustomerIDMatchType, Some("https://api.ewaypayments.com/"), Some("CustomerIDMatchType"), __scope, false),
+        __obj.CustomerID map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("CustomerID"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayTransactionSearchResponseFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TransactionSearchResponse] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TransactionSearchResponse] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionSearchResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.TransactionSearchResponse(p1.headOption map { scalaxb.fromXML[org.birchavenue.eway.TransactionSearchResponseType](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TransactionSearchResponse, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.TransactionSearchResult map { scalaxb.toXML[org.birchavenue.eway.TransactionSearchResponseType](_, Some("https://api.ewaypayments.com/"), Some("TransactionSearchResult"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayTransactionSearchResponseTypeFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TransactionSearchResponseType] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("TransactionSearchResponse")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TransactionSearchResponseType] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Errors")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Transactions")) ^^
+      { case p1 ~ p2 =>
+      org.birchavenue.eway.TransactionSearchResponseType(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfTransactionResult](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TransactionSearchResponseType, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.Errors map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("Errors"), __scope, false) } getOrElse {Nil},
+        __obj.Transactions map { scalaxb.toXML[org.birchavenue.eway.ArrayOfTransactionResult](_, Some("https://api.ewaypayments.com/"), Some("Transactions"), __scope, false) } getOrElse {Nil})
+
+  }
+
+  trait DefaultEwayArrayOfTransactionResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.ArrayOfTransactionResult] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("ArrayOfTransactionResult")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.ArrayOfTransactionResult] =
+      phrase(rep(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionResult")) ^^
+      { case p1 =>
+      org.birchavenue.eway.ArrayOfTransactionResult(p1.toSeq map { _.nilOption map { scalaxb.fromXML[org.birchavenue.eway.TransactionResult](_, scalaxb.ElemName(node) :: stack) }}: _*) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.ArrayOfTransactionResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      (__obj.TransactionResult flatMap { scalaxb.toXML[Option[org.birchavenue.eway.TransactionResult]](_, Some("https://api.ewaypayments.com/"), Some("TransactionResult"), __scope, false) })
+
+  }
+
+  trait DefaultEwayTransactionResultFormat extends scalaxb.ElemNameParser[org.birchavenue.eway.TransactionResult] {
+    val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    
+    override def typeName: Option[String] = Some("TransactionResult")
+
+    def parser(node: scala.xml.Node, stack: List[scalaxb.ElemName]): Parser[org.birchavenue.eway.TransactionResult] =
+      phrase(opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "AuthorisationCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseCode")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ResponseMessage")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceNumber")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "InvoiceReference")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TotalAmount")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TransactionStatus")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "TokenCustomerID")) ~ 
+      (scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "BeagleScore")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Options")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Verification")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "BeagleVerification")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "Customer")) ~ 
+      opt(scalaxb.ElemName(Some("https://api.ewaypayments.com/"), "ShippingAddress")) ^^
+      { case p1 ~ p2 ~ p3 ~ p4 ~ p5 ~ p6 ~ p7 ~ p8 ~ p9 ~ p10 ~ p11 ~ p12 ~ p13 ~ p14 ~ p15 =>
+      org.birchavenue.eway.TransactionResult(p1.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p2.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p3.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p4.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p5.headOption map { scalaxb.fromXML[String](_, scalaxb.ElemName(node) :: stack) },
+        p6.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p7.nilOption map { scalaxb.fromXML[Int](_, scalaxb.ElemName(node) :: stack) },
+        p8.nilOption map { scalaxb.fromXML[Boolean](_, scalaxb.ElemName(node) :: stack) },
+        p9.nilOption map { scalaxb.fromXML[Long](_, scalaxb.ElemName(node) :: stack) },
+        p10.nilOption map { scalaxb.fromXML[BigDecimal](_, scalaxb.ElemName(node) :: stack) },
+        p11.headOption map { scalaxb.fromXML[org.birchavenue.eway.ArrayOfOption](_, scalaxb.ElemName(node) :: stack) },
+        p12.headOption map { scalaxb.fromXML[org.birchavenue.eway.VerificationResult](_, scalaxb.ElemName(node) :: stack) },
+        p13.headOption map { scalaxb.fromXML[org.birchavenue.eway.BeagleVerifyResult](_, scalaxb.ElemName(node) :: stack) },
+        p14.headOption map { scalaxb.fromXML[org.birchavenue.eway.Customerable](_, scalaxb.ElemName(node) :: stack) },
+        p15.headOption map { scalaxb.fromXML[org.birchavenue.eway.ShippingAddress](_, scalaxb.ElemName(node) :: stack) }) })
+    
+    def writesChildNodes(__obj: org.birchavenue.eway.TransactionResult, __scope: scala.xml.NamespaceBinding): Seq[scala.xml.Node] =
+      Seq.concat(__obj.AuthorisationCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("AuthorisationCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseCode map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseCode"), __scope, false) } getOrElse {Nil},
+        __obj.ResponseMessage map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("ResponseMessage"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceNumber map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceNumber"), __scope, false) } getOrElse {Nil},
+        __obj.InvoiceReference map { scalaxb.toXML[String](_, Some("https://api.ewaypayments.com/"), Some("InvoiceReference"), __scope, false) } getOrElse {Nil},
+        scalaxb.toXML[Option[Int]](__obj.TotalAmount, Some("https://api.ewaypayments.com/"), Some("TotalAmount"), __scope, false),
+        scalaxb.toXML[Option[Int]](__obj.TransactionID, Some("https://api.ewaypayments.com/"), Some("TransactionID"), __scope, false),
+        scalaxb.toXML[Option[Boolean]](__obj.TransactionStatus, Some("https://api.ewaypayments.com/"), Some("TransactionStatus"), __scope, false),
+        scalaxb.toXML[Option[Long]](__obj.TokenCustomerID, Some("https://api.ewaypayments.com/"), Some("TokenCustomerID"), __scope, false),
+        scalaxb.toXML[Option[BigDecimal]](__obj.BeagleScore, Some("https://api.ewaypayments.com/"), Some("BeagleScore"), __scope, false),
+        __obj.Options map { scalaxb.toXML[org.birchavenue.eway.ArrayOfOption](_, Some("https://api.ewaypayments.com/"), Some("Options"), __scope, false) } getOrElse {Nil},
+        __obj.Verification map { scalaxb.toXML[org.birchavenue.eway.VerificationResult](_, Some("https://api.ewaypayments.com/"), Some("Verification"), __scope, false) } getOrElse {Nil},
+        __obj.BeagleVerification map { scalaxb.toXML[org.birchavenue.eway.BeagleVerifyResult](_, Some("https://api.ewaypayments.com/"), Some("BeagleVerification"), __scope, false) } getOrElse {Nil},
+        __obj.Customer map { scalaxb.toXML[org.birchavenue.eway.Customerable](_, Some("https://api.ewaypayments.com/"), Some("Customer"), __scope, false) } getOrElse {Nil},
+        __obj.ShippingAddress map { scalaxb.toXML[org.birchavenue.eway.ShippingAddress](_, Some("https://api.ewaypayments.com/"), Some("ShippingAddress"), __scope, false) } getOrElse {Nil})
+
+  }
+
+
+  trait Rapid30Soap12Bindings { this: scalaxb.SoapClients =>
+    lazy val targetNamespace: Option[String] = Some("https://api.ewaypayments.com/")
+    lazy val service: org.birchavenue.eway.Rapid30Soap = new Rapid30Soap12Binding {}
+    val endpoint: String
+    def baseAddress = new java.net.URI(endpoint)
+
+    trait Rapid30Soap12Binding extends org.birchavenue.eway.Rapid30Soap {
+      def createAccessCode(request: Option[org.birchavenue.eway.CreateAccessCodeRequestable]): Either[scalaxb.Fault[Any], org.birchavenue.eway.CreateAccessCodeResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.CreateAccessCode(request), Some("https://api.ewaypayments.com/"), "CreateAccessCode", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/CreateAccessCode"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeResponse](body.headOption getOrElse {body}))
+        }
+      def createAccessCodeShared(request: Option[org.birchavenue.eway.CreateAccessCodeSharedRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.CreateAccessCodeSharedResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.CreateAccessCodeShared(request), Some("https://api.ewaypayments.com/"), "CreateAccessCodeShared", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/CreateAccessCodeShared"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.CreateAccessCodeSharedResponse](body.headOption getOrElse {body}))
+        }
+      def getAccessCodeResult(request: Option[org.birchavenue.eway.GetAccessCodeResultRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.GetAccessCodeResultResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.GetAccessCodeResult(request), Some("https://api.ewaypayments.com/"), "GetAccessCodeResult", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/GetAccessCodeResult"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.GetAccessCodeResultResponse](body.headOption getOrElse {body}))
+        }
+      def directPayment(request: Option[org.birchavenue.eway.DirectPaymentRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectPaymentResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.DirectPayment(request), Some("https://api.ewaypayments.com/"), "DirectPayment", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/DirectPayment"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.DirectPaymentResponse](body.headOption getOrElse {body}))
+        }
+      def directCustomerCreate(request: Option[org.birchavenue.eway.DirectCustomerRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectCustomerCreateResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.DirectCustomerCreate(request), Some("https://api.ewaypayments.com/"), "DirectCustomerCreate", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/DirectCustomerCreate"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerCreateResponse](body.headOption getOrElse {body}))
+        }
+      def directCustomerUpdate(request: Option[org.birchavenue.eway.DirectCustomerRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectCustomerUpdateResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.DirectCustomerUpdate(request), Some("https://api.ewaypayments.com/"), "DirectCustomerUpdate", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/DirectCustomerUpdate"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerUpdateResponse](body.headOption getOrElse {body}))
+        }
+      def directRefund(request: Option[org.birchavenue.eway.DirectRefundRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectRefundResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.DirectRefund(request), Some("https://api.ewaypayments.com/"), "DirectRefund", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/DirectRefund"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.DirectRefundResponse](body.headOption getOrElse {body}))
+        }
+      def directCustomerSearch(request: Option[org.birchavenue.eway.DirectCustomerSearchRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectCustomerSearchResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.DirectCustomerSearch(request), Some("https://api.ewaypayments.com/"), "DirectCustomerSearch", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/DirectCustomerSearch"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.DirectCustomerSearchResponse](body.headOption getOrElse {body}))
+        }
+      def transactionSearch(request: Option[org.birchavenue.eway.TransactionSearchRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.TransactionSearchResponse] = 
+        soapClient.requestResponse(scalaxb.toXML(org.birchavenue.eway.TransactionSearch(request), Some("https://api.ewaypayments.com/"), "TransactionSearch", defaultScope),
+            Nil, defaultScope, baseAddress, "POST", Some(new java.net.URI("https://api.ewaypayments.com/TransactionSearch"))) match {
+          case Left(x)  => Left(x)
+          case Right((header, body)) =>
+            Right(scalaxb.fromXML[org.birchavenue.eway.TransactionSearchResponse](body.headOption getOrElse {body}))
         }
     }
   }

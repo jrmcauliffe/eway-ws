@@ -1,6 +1,6 @@
 package scalaxb
 
-import scala.xml.{Node, NodeSeq, NamespaceBinding, Elem, UnprefixedAttribute, PrefixedAttribute, Null}
+import scala.xml.{Node, NodeSeq, NamespaceBinding, Elem, UnprefixedAttribute, PrefixedAttribute}
 import javax.xml.datatype.{XMLGregorianCalendar}
 import javax.xml.namespace.QName
 import javax.xml.bind.DatatypeConverter
@@ -12,7 +12,7 @@ object `package` {
   def fromXML[A](seq: NodeSeq, stack: List[ElemName] = Nil)
                 (implicit format: XMLFormat[A]): A = format.reads(seq, stack) match {
     case Right(a) => a
-    case Left(a) => throw new ParserFailure(a)
+    case Left(a) => throw new ParserFailure("Error while parsing %s: %s" format(seq.toString, a))
   }
 
   @implicitNotFound(msg = "Cannot find XMLFormat type class for ${A}")
@@ -175,11 +175,11 @@ trait XMLStandardTypes {
 
   implicit lazy val __BooleanXMLFormat: XMLFormat[Boolean] = new XMLFormat[Boolean] {
     def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Boolean] = 
-          seq.text match {
-              case "1" | "true" => Right(true)
-              case "0" | "false" => Right(false)
-              case x => Left("Invalid boolean: "+x)
-          }
+      seq.text match {
+        case "1" | "true" => Right(true)
+        case "0" | "false" => Right(false)
+        case x => Left("Invalid boolean: "+x)
+      }
 
     def writes(obj: Boolean, namespace: Option[String], elementLabel: Option[String],
         scope: scala.xml.NamespaceBinding, typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -265,10 +265,15 @@ trait XMLStandardTypes {
   }
 
   implicit def seqXMLFormat[A: XMLFormat]: XMLFormat[Seq[A]] = new XMLFormat[Seq[A]] {
-    def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Seq[A]] = try {
-      val xs = Helper.splitBySpace(seq.text).toSeq
-      Right(xs map { x => fromXML[A](scala.xml.Text(x), stack) })
-    } catch { case e: Exception => Left(e.toString) }
+    def reads(seq: scala.xml.NodeSeq, stack: List[ElemName]): Either[String, Seq[A]] =
+    seq match {
+      case node: scala.xml.Node =>
+        try {
+          val xs = Helper.splitBySpace(node.text).toSeq
+          Right(xs map { x => fromXML[A](scala.xml.Elem(node.prefix, node.label, scala.xml.Null, node.scope, scala.xml.Text(x)), stack) })
+        } catch { case e: Exception => Left(e.toString) }
+      case _ => Left("Node expected: " + seq.toString)
+    }
 
     def writes(obj: Seq[A], namespace: Option[String], elementLabel: Option[String],
         scope: scala.xml.NamespaceBinding, typeAttribute: Boolean): scala.xml.NodeSeq =
@@ -601,6 +606,8 @@ object ElemName {
       elemName.node = node
       elemName
   }
+
+  implicit def toNodeSeq(elem: ElemName): scala.xml.NodeSeq = elem.node
 }
 
 trait AnyElemNameParser extends scala.util.parsing.combinator.Parsers {
@@ -801,14 +808,13 @@ object Helper {
     java.net.URI.create(value.trim)
 
   def isNil(node: scala.xml.Node) =
-    (node \ ("@{" + XSI_URL + "}nil")).headOption map { _.text == "true" } getOrElse {
+    (node \ ("@{" + XSI_URL + "}nil")).headOption map { case x => x.text == "true" || x.text == "1" } getOrElse {
       false
     }
 
   def nilElem(namespace: Option[String], elementLabel: String,
       scope: scala.xml.NamespaceBinding) =
     scala.xml.Elem(getPrefix(namespace, scope).orNull, elementLabel,
-  //      Null,
       scala.xml.Attribute(scope.getPrefix(XSI_URL), "nil", "true", scala.xml.Null),
       scope)
 

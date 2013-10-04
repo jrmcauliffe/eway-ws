@@ -3,8 +3,15 @@ package org.birchavenue.eway
 
 
 trait Rapid30Soap {
-  def createAccessCode(request: Option[org.birchavenue.eway.CreateAccessCodeRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.CreateAccessCodeResponse]
+  def createAccessCode(request: Option[org.birchavenue.eway.CreateAccessCodeRequestable]): Either[scalaxb.Fault[Any], org.birchavenue.eway.CreateAccessCodeResponse]
+  def createAccessCodeShared(request: Option[org.birchavenue.eway.CreateAccessCodeSharedRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.CreateAccessCodeSharedResponse]
   def getAccessCodeResult(request: Option[org.birchavenue.eway.GetAccessCodeResultRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.GetAccessCodeResultResponse]
+  def directPayment(request: Option[org.birchavenue.eway.DirectPaymentRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectPaymentResponse]
+  def directCustomerCreate(request: Option[org.birchavenue.eway.DirectCustomerRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectCustomerCreateResponse]
+  def directCustomerUpdate(request: Option[org.birchavenue.eway.DirectCustomerRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectCustomerUpdateResponse]
+  def directRefund(request: Option[org.birchavenue.eway.DirectRefundRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectRefundResponse]
+  def directCustomerSearch(request: Option[org.birchavenue.eway.DirectCustomerSearchRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.DirectCustomerSearchResponse]
+  def transactionSearch(request: Option[org.birchavenue.eway.TransactionSearchRequest]): Either[scalaxb.Fault[Any], org.birchavenue.eway.TransactionSearchResponse]
 }
 
 

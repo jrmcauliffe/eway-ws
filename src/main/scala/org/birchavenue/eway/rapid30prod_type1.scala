@@ -2,18 +2,35 @@
 package org.birchavenue.eway
 
 
-case class CreateAccessCode(request: Option[org.birchavenue.eway.CreateAccessCodeRequest] = None)
+case class CreateAccessCode(request: Option[org.birchavenue.eway.CreateAccessCodeRequestable] = None)
+
+
+trait CreateAccessCodeRequestable extends BaseRequestable {
+  val Customer: Option[org.birchavenue.eway.Customerable]
+  val ShippingAddress: Option[org.birchavenue.eway.ShippingAddress]
+  val Items: Option[org.birchavenue.eway.ArrayOfLineItem]
+  val Options: Option[org.birchavenue.eway.ArrayOfOption]
+  val Payment: Option[org.birchavenue.eway.Paymentable]
+  val RedirectUrl: Option[String]
+  val CustomerIP: Option[String]
+  val DeviceID: Option[String]
+  val PartnerID: Option[String]
+  val Method: org.birchavenue.eway.Method
+  val TransactionType: Option[org.birchavenue.eway.TransactionTypes]
+}
 
 
 case class CreateAccessCodeRequest(Customer: Option[org.birchavenue.eway.Customerable] = None,
   ShippingAddress: Option[org.birchavenue.eway.ShippingAddress] = None,
   Items: Option[org.birchavenue.eway.ArrayOfLineItem] = None,
   Options: Option[org.birchavenue.eway.ArrayOfOption] = None,
-  Payment: Option[org.birchavenue.eway.Payment] = None,
+  Payment: Option[org.birchavenue.eway.Paymentable] = None,
   RedirectUrl: Option[String] = None,
   CustomerIP: Option[String] = None,
   DeviceID: Option[String] = None,
-  Method: org.birchavenue.eway.Method) extends BaseRequestable
+  PartnerID: Option[String] = None,
+  Method: org.birchavenue.eway.Method,
+  TransactionType: Option[org.birchavenue.eway.TransactionTypes] = None) extends CreateAccessCodeRequestable
 
 
 trait BaseRequestable {
@@ -68,6 +85,30 @@ case class Customer(TokenCustomerID: Option[Long] = None,
   Url: Option[String] = None) extends Customerable
 
 
+trait TokenCustomerable extends Customerable {
+  val TokenCustomerID: Option[Long]
+  val Reference: Option[String]
+  val Title: Option[String]
+  val FirstName: Option[String]
+  val LastName: Option[String]
+  val CompanyName: Option[String]
+  val JobDescription: Option[String]
+  val Street1: Option[String]
+  val Street2: Option[String]
+  val City: Option[String]
+  val State: Option[String]
+  val PostalCode: Option[String]
+  val Country: Option[String]
+  val Email: Option[String]
+  val Phone: Option[String]
+  val Mobile: Option[String]
+  val Comments: Option[String]
+  val Fax: Option[String]
+  val Url: Option[String]
+  val tokencustomerablesequence1: org.birchavenue.eway.TokenCustomerableSequence1
+}
+
+
 case class TokenCustomer(TokenCustomerID: Option[Long] = None,
   Reference: Option[String] = None,
   Title: Option[String] = None,
@@ -87,26 +128,26 @@ case class TokenCustomer(TokenCustomerID: Option[Long] = None,
   Comments: Option[String] = None,
   Fax: Option[String] = None,
   Url: Option[String] = None,
-  tokencustomersequence1: org.birchavenue.eway.TokenCustomerSequence1) extends Customerable {
-  lazy val CardNumber = tokencustomersequence1.CardNumber
-  lazy val CardStartMonth = tokencustomersequence1.CardStartMonth
-  lazy val CardStartYear = tokencustomersequence1.CardStartYear
-  lazy val CardIssueNumber = tokencustomersequence1.CardIssueNumber
-  lazy val CardName = tokencustomersequence1.CardName
-  lazy val CardExpiryMonth = tokencustomersequence1.CardExpiryMonth
-  lazy val CardExpiryYear = tokencustomersequence1.CardExpiryYear
-  lazy val IsActive = tokencustomersequence1.IsActive
+  tokencustomerablesequence1: org.birchavenue.eway.TokenCustomerableSequence1) extends TokenCustomerable {
+  lazy val CardNumber = tokencustomerablesequence1.CardNumber
+  lazy val CardStartMonth = tokencustomerablesequence1.CardStartMonth
+  lazy val CardStartYear = tokencustomerablesequence1.CardStartYear
+  lazy val CardIssueNumber = tokencustomerablesequence1.CardIssueNumber
+  lazy val CardName = tokencustomerablesequence1.CardName
+  lazy val CardExpiryMonth = tokencustomerablesequence1.CardExpiryMonth
+  lazy val CardExpiryYear = tokencustomerablesequence1.CardExpiryYear
+  lazy val IsActive = tokencustomerablesequence1.IsActive
 }
 
 
-case class TokenCustomerSequence1(CardNumber: Option[String] = None,
+case class TokenCustomerableSequence1(CardNumber: Option[String] = None,
   CardStartMonth: Option[String] = None,
   CardStartYear: Option[String] = None,
   CardIssueNumber: Option[String] = None,
   CardName: Option[String] = None,
   CardExpiryMonth: Option[String] = None,
   CardExpiryYear: Option[String] = None,
-  IsActive: Boolean)
+  IsActive: Option[Boolean] = None)
 
 
 case class ShippingAddress(ShippingMethod: Option[String] = None,
@@ -140,16 +181,25 @@ case class ArrayOfOption(Option: Option[org.birchavenue.eway.OptionType]*)
 case class OptionType(Value: Option[String] = None)
 
 
+trait Paymentable {
+  val TotalAmount: Int
+  val InvoiceNumber: Option[String]
+  val InvoiceDescription: Option[String]
+  val InvoiceReference: Option[String]
+  val CurrencyCode: Option[String]
+}
+
+
 case class Payment(TotalAmount: Int,
   InvoiceNumber: Option[String] = None,
   InvoiceDescription: Option[String] = None,
   InvoiceReference: Option[String] = None,
-  CurrencyCode: Option[String] = None)
+  CurrencyCode: Option[String] = None) extends Paymentable
 
 trait Method
 
 object Method {
-  def fromString(value: String): Method = value match {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): Method = value match {
     case "ProcessPayment" => ProcessPaymentValue
     case "CreateTokenCustomer" => CreateTokenCustomer
     case "UpdateTokenCustomer" => UpdateTokenCustomer
@@ -163,15 +213,43 @@ case object CreateTokenCustomer extends Method { override def toString = "Create
 case object UpdateTokenCustomer extends Method { override def toString = "UpdateTokenCustomer" }
 case object TokenPayment extends Method { override def toString = "TokenPayment" }
 
+trait TransactionTypes
 
-case class CreateAccessCodeResponse(CreateAccessCodeResult: Option[org.birchavenue.eway.CreateAccessCodeResponseType] = None)
+object TransactionTypes {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): TransactionTypes = value match {
+    case "Unknown" => Unknown
+    case "Purchase" => Purchase
+    case "Recurring" => Recurring
+    case "Refund" => RefundValue
+    case "MOTO" => MOTO
+
+  }
+}
+
+case object Unknown extends TransactionTypes { override def toString = "Unknown" }
+case object Purchase extends TransactionTypes { override def toString = "Purchase" }
+case object Recurring extends TransactionTypes { override def toString = "Recurring" }
+case object RefundValue extends TransactionTypes { override def toString = "Refund" }
+case object MOTO extends TransactionTypes { override def toString = "MOTO" }
+
+
+case class CreateAccessCodeResponse(CreateAccessCodeResult: Option[org.birchavenue.eway.CreateAccessCodeResponsable] = None)
+
+
+trait CreateAccessCodeResponsable extends BaseResponsable {
+  val Errors: Option[String]
+  val AccessCode: Option[String]
+  val Customer: Option[org.birchavenue.eway.TokenCustomerable]
+  val Payment: Option[org.birchavenue.eway.Paymentable]
+  val FormActionURL: Option[String]
+}
 
 
 case class CreateAccessCodeResponseType(Errors: Option[String] = None,
   AccessCode: Option[String] = None,
-  Customer: Option[org.birchavenue.eway.TokenCustomer] = None,
-  Payment: Option[org.birchavenue.eway.Payment] = None,
-  FormActionURL: Option[String] = None) extends BaseResponsable
+  Customer: Option[org.birchavenue.eway.TokenCustomerable] = None,
+  Payment: Option[org.birchavenue.eway.Paymentable] = None,
+  FormActionURL: Option[String] = None) extends CreateAccessCodeResponsable
 
 
 trait BaseResponsable {
@@ -180,6 +258,101 @@ trait BaseResponsable {
 
 
 case class BaseResponse(Errors: Option[String] = None) extends BaseResponsable
+
+
+case class CreateAccessCodeShared(request: Option[org.birchavenue.eway.CreateAccessCodeSharedRequest] = None)
+
+
+case class CreateAccessCodeSharedRequest(Customer: Option[org.birchavenue.eway.Customerable] = None,
+  ShippingAddress: Option[org.birchavenue.eway.ShippingAddress] = None,
+  Items: Option[org.birchavenue.eway.ArrayOfLineItem] = None,
+  Options: Option[org.birchavenue.eway.ArrayOfOption] = None,
+  Payment: Option[org.birchavenue.eway.Paymentable] = None,
+  RedirectUrl: Option[String] = None,
+  CustomerIP: Option[String] = None,
+  DeviceID: Option[String] = None,
+  PartnerID: Option[String] = None,
+  Method: org.birchavenue.eway.Method,
+  TransactionType: Option[org.birchavenue.eway.TransactionTypes] = None,
+  CustomerReadOnly: Option[Boolean] = None,
+  VerifyCustomerPhone: Option[Boolean] = None,
+  VerifyCustomerEmail: Option[Boolean] = None,
+  CancelUrl: Option[String] = None,
+  LogoUrl: Option[String] = None,
+  FooterText: Option[String] = None,
+  HeaderText: Option[String] = None,
+  Language: Option[String] = None,
+  AllowedCards: Option[Seq[org.birchavenue.eway.AllowedCards]] = None,
+  CustomView: Option[org.birchavenue.eway.CustomView] = None) extends CreateAccessCodeRequestable
+
+trait AllowedCards
+
+object AllowedCards {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): AllowedCards = value match {
+    case "None" => NoneType
+    case "Visa" => Visa
+    case "Mastercard" => Mastercard
+    case "Amex" => Amex
+    case "Diners" => Diners
+    case "PayPal" => PayPal
+
+  }
+}
+
+case object NoneType extends AllowedCards { override def toString = "None" }
+case object Visa extends AllowedCards { override def toString = "Visa" }
+case object Mastercard extends AllowedCards { override def toString = "Mastercard" }
+case object Amex extends AllowedCards { override def toString = "Amex" }
+case object Diners extends AllowedCards { override def toString = "Diners" }
+case object PayPal extends AllowedCards { override def toString = "PayPal" }
+
+trait CustomView
+
+object CustomView {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): CustomView = value match {
+    case "Default" => Default
+    case "Custom" => Custom
+    case "Bootstrap" => Bootstrap
+    case "BootstrapAmelia" => BootstrapAmelia
+    case "BootstrapCerulean" => BootstrapCerulean
+    case "BootstrapCosmo" => BootstrapCosmo
+    case "BootstrapCyborg" => BootstrapCyborg
+    case "BootstrapFlatly" => BootstrapFlatly
+    case "BootstrapJournal" => BootstrapJournal
+    case "BootstrapReadable" => BootstrapReadable
+    case "BootstrapSimplex" => BootstrapSimplex
+    case "BootstrapSlate" => BootstrapSlate
+    case "BootstrapSpacelab" => BootstrapSpacelab
+    case "BootstrapUnited" => BootstrapUnited
+
+  }
+}
+
+case object Default extends CustomView { override def toString = "Default" }
+case object Custom extends CustomView { override def toString = "Custom" }
+case object Bootstrap extends CustomView { override def toString = "Bootstrap" }
+case object BootstrapAmelia extends CustomView { override def toString = "BootstrapAmelia" }
+case object BootstrapCerulean extends CustomView { override def toString = "BootstrapCerulean" }
+case object BootstrapCosmo extends CustomView { override def toString = "BootstrapCosmo" }
+case object BootstrapCyborg extends CustomView { override def toString = "BootstrapCyborg" }
+case object BootstrapFlatly extends CustomView { override def toString = "BootstrapFlatly" }
+case object BootstrapJournal extends CustomView { override def toString = "BootstrapJournal" }
+case object BootstrapReadable extends CustomView { override def toString = "BootstrapReadable" }
+case object BootstrapSimplex extends CustomView { override def toString = "BootstrapSimplex" }
+case object BootstrapSlate extends CustomView { override def toString = "BootstrapSlate" }
+case object BootstrapSpacelab extends CustomView { override def toString = "BootstrapSpacelab" }
+case object BootstrapUnited extends CustomView { override def toString = "BootstrapUnited" }
+
+
+case class CreateAccessCodeSharedResponse(CreateAccessCodeSharedResult: Option[org.birchavenue.eway.CreateAccessCodeSharedResponseType] = None)
+
+
+case class CreateAccessCodeSharedResponseType(Errors: Option[String] = None,
+  AccessCode: Option[String] = None,
+  Customer: Option[org.birchavenue.eway.TokenCustomerable] = None,
+  Payment: Option[org.birchavenue.eway.Paymentable] = None,
+  FormActionURL: Option[String] = None,
+  SharedPaymentUrl: Option[String] = None) extends CreateAccessCodeResponsable
 
 
 case class GetAccessCodeResult(request: Option[org.birchavenue.eway.GetAccessCodeResultRequest] = None)
@@ -204,7 +377,8 @@ case class GetAccessCodeResultResponseType(Errors: Option[String] = None,
   TokenCustomerID: Option[Long] = None,
   BeagleScore: Option[BigDecimal] = None,
   Options: Option[org.birchavenue.eway.ArrayOfOption] = None,
-  Verification: Option[org.birchavenue.eway.VerificationResult] = None) extends BaseResponsable
+  Verification: Option[org.birchavenue.eway.VerificationResult] = None,
+  BeagleVerification: Option[org.birchavenue.eway.BeagleVerifyResult] = None) extends BaseResponsable
 
 
 case class VerificationResult(CVN: org.birchavenue.eway.VerificationStatus,
@@ -216,7 +390,7 @@ case class VerificationResult(CVN: org.birchavenue.eway.VerificationStatus,
 trait VerificationStatus
 
 object VerificationStatus {
-  def fromString(value: String): VerificationStatus = value match {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): VerificationStatus = value match {
     case "Unchecked" => Unchecked
     case "Valid" => Valid
     case "Invalid" => Invalid
@@ -227,4 +401,232 @@ object VerificationStatus {
 case object Unchecked extends VerificationStatus { override def toString = "Unchecked" }
 case object Valid extends VerificationStatus { override def toString = "Valid" }
 case object Invalid extends VerificationStatus { override def toString = "Invalid" }
+
+
+case class BeagleVerifyResult(Email: org.birchavenue.eway.BeagleVerifyStatus,
+  Phone: org.birchavenue.eway.BeagleVerifyStatus)
+
+trait BeagleVerifyStatus
+
+object BeagleVerifyStatus {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): BeagleVerifyStatus = value match {
+    case "NotVerified" => NotVerified
+    case "Attempted" => Attempted
+    case "Verified" => Verified
+    case "Failed" => Failed
+
+  }
+}
+
+case object NotVerified extends BeagleVerifyStatus { override def toString = "NotVerified" }
+case object Attempted extends BeagleVerifyStatus { override def toString = "Attempted" }
+case object Verified extends BeagleVerifyStatus { override def toString = "Verified" }
+case object Failed extends BeagleVerifyStatus { override def toString = "Failed" }
+
+
+case class DirectPayment(request: Option[org.birchavenue.eway.DirectPaymentRequest] = None)
+
+
+case class DirectPaymentRequest(Customer: Option[org.birchavenue.eway.DirectTokenCustomer] = None,
+  ShippingAddress: Option[org.birchavenue.eway.ShippingAddress] = None,
+  Items: Option[org.birchavenue.eway.ArrayOfLineItem] = None,
+  Options: Option[org.birchavenue.eway.ArrayOfOption] = None,
+  Payment: Option[org.birchavenue.eway.Paymentable] = None,
+  RedirectUrl: Option[String] = None,
+  CustomerIP: Option[String] = None,
+  DeviceID: Option[String] = None,
+  PartnerID: Option[String] = None,
+  Method: org.birchavenue.eway.Method,
+  TransactionType: org.birchavenue.eway.TransactionTypes) extends BaseRequestable
+
+
+case class DirectTokenCustomer(TokenCustomerID: Option[Long] = None,
+  Reference: Option[String] = None,
+  Title: Option[String] = None,
+  FirstName: Option[String] = None,
+  LastName: Option[String] = None,
+  CompanyName: Option[String] = None,
+  JobDescription: Option[String] = None,
+  Street1: Option[String] = None,
+  Street2: Option[String] = None,
+  City: Option[String] = None,
+  State: Option[String] = None,
+  PostalCode: Option[String] = None,
+  Country: Option[String] = None,
+  Email: Option[String] = None,
+  Phone: Option[String] = None,
+  Mobile: Option[String] = None,
+  Comments: Option[String] = None,
+  Fax: Option[String] = None,
+  Url: Option[String] = None,
+  tokencustomerablesequence1: org.birchavenue.eway.TokenCustomerableSequence1,
+  CardDetails: Option[org.birchavenue.eway.CardDetails] = None) extends TokenCustomerable {
+  lazy val CardNumber = tokencustomerablesequence1.CardNumber
+  lazy val CardStartMonth = tokencustomerablesequence1.CardStartMonth
+  lazy val CardStartYear = tokencustomerablesequence1.CardStartYear
+  lazy val CardIssueNumber = tokencustomerablesequence1.CardIssueNumber
+  lazy val CardName = tokencustomerablesequence1.CardName
+  lazy val CardExpiryMonth = tokencustomerablesequence1.CardExpiryMonth
+  lazy val CardExpiryYear = tokencustomerablesequence1.CardExpiryYear
+  lazy val IsActive = tokencustomerablesequence1.IsActive
+}
+
+
+
+case class CardDetails(Number: Option[String] = None,
+  Name: Option[String] = None,
+  ExpiryMonth: Option[String] = None,
+  ExpiryYear: Option[String] = None,
+  StartMonth: Option[String] = None,
+  StartYear: Option[String] = None,
+  IssueNumber: Option[String] = None,
+  CVN: Option[String] = None)
+
+
+case class DirectPaymentResponse(DirectPaymentResult: Option[org.birchavenue.eway.DirectPaymentResponseType] = None)
+
+
+case class DirectPaymentResponseType(Errors: Option[String] = None,
+  AuthorisationCode: Option[String] = None,
+  ResponseCode: Option[String] = None,
+  ResponseMessage: Option[String] = None,
+  TransactionID: Option[Int] = None,
+  TransactionStatus: Option[Boolean] = None,
+  TransactionType: Option[String] = None,
+  BeagleScore: Option[BigDecimal] = None,
+  Verification: Option[org.birchavenue.eway.VerificationResult] = None,
+  Customer: Option[org.birchavenue.eway.DirectTokenCustomer] = None,
+  Payment: Option[org.birchavenue.eway.Paymentable] = None) extends BaseResponsable
+
+
+case class DirectCustomerCreate(request: Option[org.birchavenue.eway.DirectCustomerRequest] = None)
+
+
+case class DirectCustomerRequest(Customer: Option[org.birchavenue.eway.DirectTokenCustomer] = None) extends BaseRequestable
+
+
+case class DirectCustomerCreateResponse(DirectCustomerCreateResult: Option[org.birchavenue.eway.DirectCustomerResponse] = None)
+
+
+case class DirectCustomerResponse(Errors: Option[String] = None,
+  Customer: Option[org.birchavenue.eway.DirectTokenCustomer] = None) extends BaseResponsable
+
+
+case class DirectCustomerUpdate(request: Option[org.birchavenue.eway.DirectCustomerRequest] = None)
+
+
+case class DirectCustomerUpdateResponse(DirectCustomerUpdateResult: Option[org.birchavenue.eway.DirectCustomerResponse] = None)
+
+
+case class DirectRefund(request: Option[org.birchavenue.eway.DirectRefundRequest] = None)
+
+
+case class DirectRefundRequest(Refund: Option[org.birchavenue.eway.Refund] = None,
+  Customer: Option[org.birchavenue.eway.DirectTokenCustomer] = None,
+  ShippingAddress: Option[org.birchavenue.eway.ShippingAddress] = None,
+  Items: Option[org.birchavenue.eway.ArrayOfLineItem] = None,
+  Options: Option[org.birchavenue.eway.ArrayOfOption] = None,
+  CustomerIP: Option[String] = None,
+  DeviceID: Option[String] = None,
+  PartnerID: Option[String] = None) extends BaseRequestable
+
+
+case class Refund(TotalAmount: Int,
+  InvoiceNumber: Option[String] = None,
+  InvoiceDescription: Option[String] = None,
+  InvoiceReference: Option[String] = None,
+  CurrencyCode: Option[String] = None,
+  TransactionID: Option[String] = None) extends Paymentable
+
+
+case class DirectRefundResponse(DirectRefundResult: Option[org.birchavenue.eway.DirectRefundResponseType] = None)
+
+
+case class DirectRefundResponseType(Errors: Option[String] = None,
+  AuthorisationCode: Option[String] = None,
+  ResponseCode: Option[String] = None,
+  ResponseMessage: Option[String] = None,
+  TransactionID: Option[Int] = None,
+  TransactionStatus: Option[Boolean] = None,
+  Verification: Option[org.birchavenue.eway.VerificationResult] = None,
+  Customer: Option[org.birchavenue.eway.DirectTokenCustomer] = None,
+  Refund: Option[org.birchavenue.eway.Refund] = None) extends BaseResponsable
+
+
+case class DirectCustomerSearch(request: Option[org.birchavenue.eway.DirectCustomerSearchRequest] = None)
+
+
+case class DirectCustomerSearchRequest(CustomerFilter: Option[org.birchavenue.eway.CustomerFilter] = None,
+  TokenCustomerID: Long) extends BaseRequestable
+
+
+case class CustomerFilter(TokenCustomerIDMatchType: org.birchavenue.eway.FilterMatchType)
+
+trait FilterMatchType
+
+object FilterMatchType {
+  def fromString(value: String, scope: scala.xml.NamespaceBinding): FilterMatchType = value match {
+    case "Undefined" => Undefined
+    case "Equals" => Equals
+    case "Contains" => Contains
+    case "StartsWith" => StartsWith
+
+  }
+}
+
+case object Undefined extends FilterMatchType { override def toString = "Undefined" }
+case object Equals extends FilterMatchType { override def toString = "Equals" }
+case object Contains extends FilterMatchType { override def toString = "Contains" }
+case object StartsWith extends FilterMatchType { override def toString = "StartsWith" }
+
+
+case class DirectCustomerSearchResponse(DirectCustomerSearchResult: Option[org.birchavenue.eway.DirectCustomerSearchResponseType] = None)
+
+
+case class DirectCustomerSearchResponseType(Errors: Option[String] = None,
+  Customers: Option[org.birchavenue.eway.ArrayOfDirectTokenCustomer] = None) extends BaseResponsable
+
+
+case class ArrayOfDirectTokenCustomer(DirectTokenCustomer: Option[org.birchavenue.eway.DirectTokenCustomer]*)
+
+
+case class TransactionSearch(request: Option[org.birchavenue.eway.TransactionSearchRequest] = None)
+
+
+case class TransactionSearchRequest(TransactionFilter: Option[org.birchavenue.eway.TransactionFilter] = None) extends BaseRequestable
+
+
+case class TransactionFilter(TransactionIDMatchType: org.birchavenue.eway.FilterMatchType,
+  TransactionID: Option[String] = None,
+  AccessCodeMatchType: org.birchavenue.eway.FilterMatchType,
+  AccessCode: Option[String] = None,
+  CustomerIDMatchType: org.birchavenue.eway.FilterMatchType,
+  CustomerID: Option[String] = None)
+
+
+case class TransactionSearchResponse(TransactionSearchResult: Option[org.birchavenue.eway.TransactionSearchResponseType] = None)
+
+
+case class TransactionSearchResponseType(Errors: Option[String] = None,
+  Transactions: Option[org.birchavenue.eway.ArrayOfTransactionResult] = None) extends BaseResponsable
+
+
+case class ArrayOfTransactionResult(TransactionResult: Option[org.birchavenue.eway.TransactionResult]*)
+
+
+case class TransactionResult(AuthorisationCode: Option[String] = None,
+  ResponseCode: Option[String] = None,
+  ResponseMessage: Option[String] = None,
+  InvoiceNumber: Option[String] = None,
+  InvoiceReference: Option[String] = None,
+  TotalAmount: Option[Int] = None,
+  TransactionID: Option[Int] = None,
+  TransactionStatus: Option[Boolean] = None,
+  TokenCustomerID: Option[Long] = None,
+  BeagleScore: Option[BigDecimal] = None,
+  Options: Option[org.birchavenue.eway.ArrayOfOption] = None,
+  Verification: Option[org.birchavenue.eway.VerificationResult] = None,
+  BeagleVerification: Option[org.birchavenue.eway.BeagleVerifyResult] = None,
+  Customer: Option[org.birchavenue.eway.Customerable] = None,
+  ShippingAddress: Option[org.birchavenue.eway.ShippingAddress] = None)
 
